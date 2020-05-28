@@ -35,6 +35,7 @@ Where $$\nabla \pi_{\theta}(s_{i}, a_{i})$$ is the derivative of the probabailit
 
 #### The problem with the above
 
+We don't nesseserily get the optimal solution. Suppose we have a system with only on state and two actions. One of those actions has a big reward and the other a little reward. Suppose the way the policy network is initiallize means that it suggests the low reward over the high reward with a high probabailty. This shouldn't  be a problem. Over the training the network should end up reassigning the propabailty towards the better reward action. Unforntunatly becuase the policy  is initially incorrectly biased towards the poor reward option we're going to get far more samples of this action that the other and becuase it's positive reward, ableit lower reward the training will end up encourgaeing this action more simply becuase it gets more samples for it. A sufficently large amount of a small thing can be more than a small number of a big thing. 
 
 
 

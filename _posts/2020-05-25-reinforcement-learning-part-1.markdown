@@ -31,12 +31,10 @@ Usually you don't actaully know if a given action was good or bad until later. T
 
 ## Brief Interlude
 
-If you think about it this raises the question of how it is we are rewarded ourselfs. What is it that encourages our behavour? Well obviously furthering our genetic material but in between nothingness and gene propigation theres a tun of intermediate rewards that evolution has placed in order to make this process less of a floundering around in the dark and more a shaped scheme for progressing towards having and rearing equally succesful children. In the case of evolution these middle rewards just emerged from the process of compitition within our environment. Initially we didn't need to walk we just sort of rolled around in goo and ate stuff... and that was enough to get us to the end goal. But a red queen arms race later and somewhere in between hanging around in puddles and now it became useful to learn to walk among other things.
+If you think about it this raises the question of how it is we are rewarded ourselfs. What is it that encourages our behavour? Well obviously furthering our genetic material but in between nothingness and gene propigation theres a tun of intermediate rewards that evolution has placed in order to make this process less of a floundering around in the dark and more a shaped scheme for progressing towards having and rearing equally succesful children. In the case of evolution these middle rewards just emerged from the process of compitition within our environment. Initially we didn't need to walk we just sort of rolled around in goo and ate stuff... and that was enough to get us to the end goal. But a evolutionary red queen arms race later and somewhere in between hanging around in puddles and now - it became rewarding to do all kinds of weird stuff.
 
 > Many were increasingly of the opinion that they'd all made a big mistake in coming down from the trees in the first place. And some said that even the trees had been a bad move, and that no one should ever have left the oceans.
 <sub>The hitchhickers guide to the galaxy, Douglas Adams</sub>
-
-It would be interesting to see if one can generate this cascade of intermediate rewards with the aim of actually creating one that was the primary goal. So rather than start with the intial goal start with something arbitrary and then enforce some kind of compitition between different solns that cuases rewards to emerge independent. You can imagine having two agents that are trying to have as much success in an arbitrary task as possible but also have to have policies that differ by some amount. This means if one gets better than the other then it has to find a way of doing even better but using a different soln, and so on... 
 
 ---
 
@@ -45,9 +43,49 @@ It would be interesting to see if one can generate this cascade of intermediate 
 The major barriors to my personal progress in this domain have defiently been
 
 1. Bits and peices of ungrepable domain specific knowledge
-2. Not knowing how to approach debuging Reinforcement algorithms
-3. Not knowing what to expect from Reinforcement algorithm performance
+2. Not knowing what to expect from Reinforcement algorithm performance
+3. Not knowing how to approach debuging Reinforcement algorithms
+
+#### Domain specific knowledge
 
 Both rl and software developement suffer from weird bits and peices of domain specific knowledge. This kind of thing just comes with the territory. Unknown unknowns undoubtly exist in any feild. The kind of thing I'm talking about here is stuff that's hard to search for becuase you don't know what's going wrong. An example is not knowing that you would typically normalize inputs before feeding them into a nerual network. If not knowing and thus not doing this cuases your training to fail it's not something your going to know to change, beucase, well you don't know to do so, at least not until you somehow stumble across it while searching around on the internet...
 
-In software development we get error messages when stuffs broken in contrast in rl you get vauge hypothises about why it's not doing what you want it to do. Similarly, In software it either works or it doesn't in rl we run an algorithm for 2 hours thinking it's learning only to have it's performance drop of a cliff in the last 20 episodes of training.
+#### Expecations and Debugging
+
+In software development we get error messages when stuffs broken. In contrast in rl you get nothing and instead are left to form vauge hypothises about why it's not doing what you want it to do. This it the aspect of the whole process which is perhaps the most frustraighting. Instead of having a clear obsitcel to navigate you have a collection of possible issues. Even worse sometimes there isn't even an issue and what you think is broken is actaully just slow, or your logging the wrong thing. My feeling is there is a kind of werid intuitional side to reinforcement learning where you eventually learn to pick up the subtle indications of each different type of issue, and know the types of things that might solve that issue. It's almost as if through an iterative process we're learning to keep what works and discard what doesn't...
+
+I don't have a great deal of experience of machine learning in general but I have a feeling that rl departs from ml in the sense that it's hard to assertain when something is learning. In ml you typically have a loss function and the model updates ensure that improvements are montonic. So while it may not be improving fast and it may not be converging to a global optimum you do know wether or not it is improving. In reinforcement learning you get something completely different. Sometimes you get this:
+
+
+![progress](/assets/clear-progress.png){:height="50%" width="100%"}
+
+
+And then sometimes you get this:
+
+
+![progress?](/assets/unclear-progress.png){:height="50%" width="100%"}
+
+
+The inherent variance in policy gradient methods seems to be a function of two things (or a couple of very vauge hypothises):
+ - In machine learning terms, the states are inputs and the rewards are the training data labels. The problem we have within the paradime of rl is that it's typically unclear how the rewards need to be allocated. so the labels are moving targets and we have to trust that in sampling the system enough they'll converge to there true values.
+ - An update in parameter space, if too big, can overshoot it's mark and push the network into a inoptimal state. In this inoptimal state the actor will move along a safe orbit until the overshot update will perturb it off this orbit. If it does this at a particularly inopertune moment then i'd guess you can get some kind of divergence of trajectories in which orbits that once went to safe areas of the state space are now redirected into low performing areas. I think becuase there are delays between action and outcome and becuase we discount earlier actions significance w.r.t. the end result it can take a long time for the network to realize that that particular action at that particular time was a mistake. Instead the actor spends ages trying to navigate the poor environment it's been redirected into.
+
+It was this that probabaly led me to bang my head against a wall the most! Often times you watch the performance of the actor improve and improve until it's doing really well until suddenly it plumments to perform worse than when it started. In retrospect this isn't always a particularly bad thing in that in being redirected there the actor will learn how to navigate said poor environment. Building in redundency like this should result in stable solutions that apply under pertubation.
+
+I suspect these behavours are highly dependent on the nature of the reward environment. In the cases where rewards are continuously allocated I'd anticipate reasonably conintuous learning profilse whereas sparse discrete rewards would likely cuase the trajectories to jump between stratigies and thus you'd expect to see a greater deal of variance in learning.
+
+These issues led me to take a kind of messy stop and start approach to the training of the luner lander solution. I'd save the model during training when it was doing well and then revert to the save point if it then flatlined. This may have been more to do with my pschology than any sensible stratigy but over time the model did improve even if that apporach was disapointingly messy.
+
+#### Finding Reinforcement problems
+
+Once I'd started to see progress on the above problems I begain trying to think of areas in which these ideas could be applied. Truthfully it's not as easy as you'd think. In principle anything can become a problem that has a reward on solving but typically the ones you might think of tend to fall foul of the fact that it's hard to run enough real world experiments to see any significant learning. Nasa can only build so many moon landers. It seems like rl is well developed to solve problems that we can simulate on a machine. This is kind of an issue if you want real world applications in that you can train something in a simulation but theres no garunetee the solution will have any cross over and on top of this correctly modeling problem spaces inside physics engines is hardly tirvial.
+
+## Main takeaways
+
+RL is very interesting, both in theory and application, and it seems to be pretty powerful in the sense that I can see there being problems that it can solve that would be very hard if not impossible to code solutions for. I've defienetly been way more negative in the above than positive but i'm pretty excited by this stuff! It's pretty remarkable that these methods work and you get solutions that seem somehow natural.
+
+However it's also been a little disapointing too. This is partly becuase the intial learning curve seemed to be a lot steeper than I expected and also becuase my expectations in general where way higher than they should have been. I didn't try but i suspect in the time it took me to obtain a solution to the luner-lander environment through training I could have easily coded a progromatic solution and with way less of me hitting my head of a wall. And I think this is the major con in that whenever you set out to solve an problem using RL your kind of making a bet that it's going to be possible. There are alot of unknowns and they don't seem to be predictable in any particular way. Like maybe it just happens to be the case that the way the reward envrionment has to be shapped your very unlikly to ever have the model get to the point where it's making progress. It's also just hard to assertain progress. My feeling is that if you can write a progromatic solution to the problem then you should probabaly always prioritise doing so. RL becomes super interesting when we find ourself in the domain of problems that cannot be solved by hand.
+
+The most enjoyable aspect of the whole thing so far has definetly been watching the way that once the luner lander has hovered down to the final 5 pixels it then drops onto the moons surface in a weirdly human way. As if theres actually some guy inside who just flips the engine off switch to bring the vehicle down to ground*.
+
+<sub> * I have no idea how to land aircarft</sub>
