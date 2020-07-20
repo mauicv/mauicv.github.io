@@ -1,11 +1,13 @@
 ---
 layout: post
-title:  "Reinforcement learning part 1"
+title:  "First Impressions of Reinforcement Learning"
 date:   2020-05-25 18:37:37 +0100
-categories: machine-learning
+categories: reinforcement-learning
 ---
+<sup>__note__: *Relevant code for this post is [here](https://github.com/mauicv/openai-gym-solns)*</sup>
 
----
+___
+
 ## First Impressions
 
 
@@ -13,15 +15,14 @@ So I've receintly started looking at Reinforcement learning in my spare time bec
 
 These blog posts are mostly going to be a summary of everything I've learnt and also bits and pieces of stuff I don't understand yet. I'll start with general takeaways, then go into theory and then give examples of implementations written in tensorflow.
 
-
----
+___
 
 ## General Problem
 
 
 All Reinforcement Learning takes place in some environment. An environment is really just a collection of states. Floundering around in this environment is an actor or agent who is at any point in time in a single state of the environment. The actor interacts with the environment by making actions. These actions transistion the actor from the state it's in to a new state. We want to train the actor to move to a particular state or collection of states that fufils some goal of ours.
 
-As an example in the [openai luner lander gym problem](...link) the environment is the moon surface, the landing site and the position of the shuttle. The actor is the spaceship and the actions it can take are the firing of each of it's engines or the choice not to do anything. We want to train this actor to succesfully move between states in the environment so as to land itself at the landing location.
+As an example in the [openai luner lander gym problem](https://gym.openai.com/envs/LunarLander-v2/) the environment is the moon surface, the landing site and the position of the shuttle. The actor is the spaceship and the actions it can take are the firing of each of it's engines or the choice not to do anything. We want to train this actor to succesfully move between states in the environment so as to land itself at the landing location.
 
 There's a couple of approaches to solving this kind of problem. The one I was primarily interested in and spent the most time looking at where policy gradient methods. In policy gradient methods you essentally have a policy that tells you how your agent is going to behave given any state in the system. Initially this policy is random and useless but by using the policy and keeping those actions that it suggests resulting in good outcomes and throwing those that result in bad outcomes you slowy improve the polciy until the set goal is achieved.
 
@@ -29,14 +30,7 @@ The way this works is essentally by makeing the policy a parameterised neural ne
 
 Usually you don't actaully know if a given action was good or bad until later. This is really the crux of the whole thing, becuase maybe something the agent did at a time $$t_{1}$$ made a significant difference to the outcome that results at time $$t_{2}$$. If the time interval $$t_{2} - t_{1}$$ is big then it's not clear that there should be any relationship between the action at $$t_{1}$$ and the outcome at $$t_{2}$$. Theres ways around this in that you can try and shape the rewards allocated through out the training. If you want an agent to learn to walk then maybe its good to reward standing as an action first. But this becomes messy becuase it's hard to define what behavours to reward in between the random behavour and the end goal. Not just this its also pretty labour intensive.
 
-## Brief Interlude
-
-If you think about it this raises the question of how it is we are rewarded ourselfs. What is it that encourages our behavour? Well obviously furthering our genetic material but in between nothingness and gene propigation theres a tun of intermediate rewards that evolution has placed in order to make this process less of a floundering around in the dark and more a shaped scheme for progressing towards having and rearing equally succesful children. In the case of evolution these middle rewards just emerged from the process of compitition within our environment. Initially we didn't need to walk we just sort of rolled around in goo and ate stuff... and that was enough to get us to the end goal. But a evolutionary red queen arms race later and somewhere in between hanging around in puddles and now - it became rewarding to do all kinds of weird stuff.
-
-> Many were increasingly of the opinion that they'd all made a big mistake in coming down from the trees in the first place. And some said that even the trees had been a bad move, and that no one should ever have left the oceans.
-<sub>The hitchhickers guide to the galaxy, Douglas Adams</sub>
-
----
+___
 
 ## Main obsticles
 
@@ -57,13 +51,13 @@ In software development we get error messages when stuffs broken. In contrast in
 I don't have a great deal of experience of machine learning in general but I have a feeling that rl departs from ml in the sense that it's hard to assertain when something is learning. In ml you typically have a loss function and the model updates ensure that improvements are montonic. So while it may not be improving fast and it may not be converging to a global optimum you do know wether or not it is improving. In reinforcement learning you get something completely different. Sometimes you get this:
 
 
-![progress](/assets/clear-progress.png){:height="50%" width="100%"}
+![progress](/assets/intro-to-rl/clear-progress.png){:height="50%" width="80%"}
 
 
 And then sometimes you get this:
 
 
-![progress?](/assets/unclear-progress.png){:height="50%" width="100%"}
+![progress?](/assets/intro-to-rl/unclear-progress.png){:height="50%" width="80%"}
 
 
 The inherent variance in policy gradient methods seems to be a function of two things (or a couple of very vauge hypothises):
@@ -80,7 +74,9 @@ These issues led me to take a kind of messy stop and start approach to the train
 
 Once I'd started to see progress on the above problems I begain trying to think of areas in which these ideas could be applied. Truthfully it's not as easy as you'd think. In principle anything can become a problem that has a reward on solving but typically the ones you might think of tend to fall foul of the fact that it's hard to run enough real world experiments to see any significant learning. Nasa can only build so many moon landers. It seems like rl is well developed to solve problems that we can simulate on a machine. This is kind of an issue if you want real world applications in that you can train something in a simulation but theres no garunetee the solution will have any cross over and on top of this correctly modeling problem spaces inside physics engines is hardly tirvial.
 
-Another issue that potentially arrises within lots of problems is just the sparcity of rewards. You might try to train an RL to learn to write simple programs. After all there is a task, writing the code, and then there is the reward, getting the correct result on running the code. You can think of this as like a maze, the machine has to choose the exact correct sequence of letters from the alphabet to get to the exact correct string that correctly implements the solution. In this case unless you can find a way of shaping the rewards correctly the model will just endlessly try random combinations of letters. Presumably Human beings can do this becuase they've been rewarded from hundreds of smaller steps along the way so as to arrive at the point where we have all the tools needed to write, debug and correct software. If you want to teach an AI to code you'll probabaly have to teach it all the stuff inbetween too. 
+Another issue that potentially arrises within lots of problems is just the sparcity of rewards. You might try to train an RL to learn to write simple programs. After all there is a task, writing the code, and then there is the reward, getting the correct result on running the code. You can think of this as like a maze, the machine has to choose the exact correct sequence of letters from the alphabet to get to the exact correct string that correctly implements the solution. In this case unless you can find a way of shaping the rewards correctly the model will just endlessly try random combinations of letters. Presumably Human beings can do this becuase they've been rewarded from hundreds of smaller steps along the way so as to arrive at the point where we have all the tools needed to write, debug and correct software. If you want to teach an AI to code you'll probabaly have to teach it all the stuff inbetween too.
+
+___
 
 ## Main takeaways
 

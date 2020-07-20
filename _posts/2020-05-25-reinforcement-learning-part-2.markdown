@@ -1,43 +1,52 @@
 ---
 layout: post
-title:  "Reinforcement learning part 2"
+title:  "Reinforcement learning, Policy Gradient Methods"
 date:   2020-05-25 18:37:37 +0100
-categories: machine-learning
+categories: reinforcement-learning
 ---
+<sup>__note__: *Relevant code for this post is [here](https://github.com/mauicv/openai-gym-solns)*</sup>
 
 ---
 
 ## Policy Gradient Methods
 
-There are different apporaches to solving the problem given in part1. The class of method i'm going to focus on initially are Policy Gradient Methods. In particular I'm implementing REINFORCE.
 
+So the reinforcement learning problem is a state space, and actor and a policy. The actor transistions between states in the state space on the basis of the actions it's taking at those states. The actions it chooses to take are selected by the policy. The policy is just some function that takes the state as input and spits out adivice on the best action to take. The polciy is usually modeled by a nerual network which means we can lean on machine learning algorithms to improve it's performance over time. The class of methods i'm going to introduce here are Policy Gradient Methods. In particular I'm implementing REINFORCE.
 
 <sup>__Note__: *Here I assume you know rudamentary details of how neural networks work and machine learning work. Like what they look like, that they're parameterised by lots of weights and biases. How you can compute the derivative w.r.t. these parameters using backpropagation. How the derivative of a loss function w.r.t. these parameters tells you what direction to change the parameters in order to improve the networks performance... These kinds of things.*</sup>
 
 
-So one potential solution to the above problem is to take a function that takes as input the state the actor is in and then gives as output a distrubution that tells us which actions are most likely to result in fufilling the goal. Inintially this function is just a guess, it just gives random probabailities for the best action. The goal of training is to encourage the function to get better and better at suggesting the best action to take at each state. So suppose you have the luner lander environment and you record the actions that this function dictates at each state in the actors trajectory. At the end you look through each of the actions and each of the states and ask which actions resulted in positive outcomes and which resulted in negative outcomes. You then want to encourage those that resulted in success and discourage those that didn't.
+So one potential solution to the above problem is to take a policy function that takes as input the state the actor is in and then gives as output a distrubution that tells us which actions are most likely to result in fufilling the goal. Inintially this function is just a guess, it just gives random probabailities for the best action. The goal of training is to encourage the policy function to get better and better at suggesting the best action to take at each state. So suppose you have the luner lander environment and you record the actions that this function dictates at each state in the actors trajectory. At the end you look through each of the actions and each of the states and ask which actions resulted in positive outcomes and which resulted in negative outcomes. You then want to encourage those that resulted in success and discourage those that didn't.
 
-The function above will be a nerual network and is known as the policy. At each state we'll give this neural policy the location of the shuttle and it'll pass that data through each of it's layers and output a vector of values. Initaily we're going to assume the set of actions are discrete so, engine on or off, rather than continuous, engine fire at 60% or maybe 65% or 65.562%. This means that the vector of values above corresponds to probabaility of which engine to fire. So given a state we compute the action probabailities and then sample from these probabailities the action we take. Becuase of this during training we don't always do the same thing, we do some things much more often but ocasionally we try stuff that the policy is mostly advising against. We then use back propigation via tensorflow to obatin the parameter change in the policy weights and biases that's going to result in the network suggesting actions that do well more than actions that do badly.
+At each state we'll give the policy the location of the shuttle and it'll pass that data through each of it's layers and output a vector of values. Initaily we're going to assume the set of actions are discrete so, engine on or off, rather than continuous, engine fire at 60% or maybe 65% or 65.562%. This means that the vector of values above corresponds to probabaility of which engine to fire. So given a state we compute the action probabailities and then sample from these probabailities the action we take. Becuase of this during training we don't always do the same thing, we do some things much more often but ocasionally we try stuff that the policy is mostly advising against. We then use back propigation via tensorflow to obatin the parameter change in the policy weights and biases that's going to result in the network suggesting actions that do well more than actions that do badly.
 
 Denote a policy by $$\pi$$ and the set of parameters underlying it, a vector of weight and biases, $$\theta$$. The set of states and actions generated by taking a state, computing the policy, sampling a action, transistion to a new state and repeating is an orbit, denote such an object $$\tau$$. These look like:
 
 $$\tau_{\theta} = [(s_{0}, a_{0}), (s_{1}, a_{1}), ..., (s_{i}, a_{i}), (s_{i+1}, a_{i+1}), ....]$$
 
-Where $$a_{i}$$ is an action sampled from the policy probabaility distrubution $$\pi_{\theta}(s_{i})$$. If the system is deterministic then given a state and an action we can directly compute the subsequent state. So $$(s_{i}, a_{i}) \rightarrow s_{i+1}$$. If the system is deterministic then you conduct some experiement and sample the next state from the probabaility distrubution of states given by taking action $$a_{i}$$ in state $$s_{i}$$. This
+Where $$a_{i}$$ is an action sampled from the policy probabaility distrubution $$\pi_{\theta}(s_{i})$$. If the system is deterministic then given a state and an action we can directly compute the subsequent state. So $$(s_{i}, a_{i}) \rightarrow s_{i+1}$$. If the system is not deterministic then you conduct some experiement and sample the next state from the probabaility distrubution of states given by taking action $$a_{i}$$ in state $$s_{i}$$.
 
-When we decide we're going to encourage an action we want to know how the network changes with respect to it's parameters. Naturally we'd expect hte update rule to look something like:
+At the end of the orbit the actor has either achieved it's goal or failed to do so. If it's achieved it we have to go back through the set of actions it's taken and find a way of allocating rewards to each on the basis of how well it's performed. If it failed then we have to go back and find the action the actor took that most so led to it's demise.
+
+When we decide we're going to encourage an action in a given state then we want to know how the network changes with respect to it's parameters, the weights and biases. Naturally we'd expect the update rule to look something like:
 
 $$
-\theta \rightarrow \theta + A\nabla \pi_{\theta}(s_{i}, a_{i})
+\theta \rightarrow \theta + A\nabla \pi_{\theta}( a_{i}\| s_{i})
 $$
 
-Where $$\nabla \pi_{\theta}(s_{i}, a_{i})$$ is the derivative of the probabaility density function w.r.t. $$\theta$$ __at the chosen action for that state__. A is something positive if the $$a_{i}$$ resulted in a good outcome and negative if it didn't go well. So then the above should make $$a_{i}$$ more likely if it was good and less if it was bad.
+Where $$\nabla \pi_{\theta}( a_{i}\| s_{i})$$ is the derivative of the probabaility density function w.r.t. $$\theta$$ __at the chosen action for that state__. A is the reward we decided to allocat that action and is positive if we think it, $$a_{i}$$, resulted in a good outcome and negative if it didn't go well. So then the above should make $$a_{i}$$ more likely if it was good and less if it was bad. The gradient tells us the direction to move the parameters of the model to increase the likelyhood of that action. So if A is positive we increase the probabailty and if it's negative we decrease it.
 
 #### The problem with the above
 
-We don't nesseserily get the optimal solution. Suppose we have a system with only on state and two actions. One of those actions has a big reward and the other a little reward. Suppose the way the policy network is initiallize means that it suggests the low reward over the high reward with a high probabailty. This shouldn't  be a problem. Over the training the network should end up reassigning the propabailty towards the better reward action. Unforntunatly becuase the policy  is initially incorrectly biased towards the poor reward option we're going to get far more samples of this action that the other and becuase it's positive reward, ableit lower reward the training will end up encourgaeing this action more simply becuase it gets more samples for it. A sufficently large amount of a small thing can be more than a small number of a big thing. 
+We don't nesseserily get the optimal solution. Suppose we have a system with only one state and two actions. One of those actions has a big reward and the other a little reward. Suppose the way the policy network is initiallize means that it suggests the low reward over the high reward with a high probabailty. This shouldn't  be a problem. Over the training the network should end up reassigning the propabailty towards the better reward action. Unforntunatly becuase the policy  is initially incorrectly biased towards the poor reward option we're going to get far more samples of this action that the other and becuase it's positive reward, ableit lower reward the training will end up encourgaeing this action more simply becuase it gets more samples for it. A sufficently large amount of a small thing can be more than a small number of a big thing. This means we have to counteract this behavour by incorporating the polcy probabailties themselves into the update rule. So if an policy suggests an action and it returns a positive reward then we update in favour of that action dependent on how likley the policy was to suggest that reward. This way updates to low reward actions that the policy suggests are balanced by the higher porbabilty of the policy suggesting them and high reward actions that the policy isn't likly to suggest are boosted to make up for the smaller likelyhood of sampling from them. The way we do this is just to devide by the probabailty of selecting an action.
 
+$$
+\theta \rightarrow \theta + A\frac{\nabla \pi_{\theta}(s_{i}, a_{i})}{ \pi_{\theta}(s_{i}, a_{i})}
+$$
 
+For a better explination [see](https://towardsdatascience.com/an-intuitive-explanation-of-policy-gradient-part-1-reinforce-aa4392cbfd3c).
+
+We've sort of ignored the value $$A$$ but it's important. Namely it
 
 
 <!-- $$
