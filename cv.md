@@ -38,7 +38,7 @@ I'm currently working as a software developer at a small start up called AlliedC
 My [GitHub](https://github.com/mauicv) and [Blog](https://www.mauicv.com) also include a number of personal projects I've been working on.
 
 - mauicv.com, a blog with articles about some of my explorations into machine learning, reinforcement learning and mathematics.
-- I've recently been learning about [Generative Adversarial Networks](https://www.mauicv.com/machine-learning/2020/07/22/generative-adversarial-networks-faces.html).
+- I've recently been learning about [Generative Adversarial Networks]({% post_url 2020-07-22-generative-adversarial-networks-faces %})
 - [Reinforcement learning solutions](https://github.com/mauicv/openai-gym-solns) to openai gym environments. Namely Policy Gradient, DQN and Actor Critic algorithms.
 - A [physics engine](https://github.com/mauicv/genesis-tubs-engine) built from scratch in JavaScript. Available on npm [here](https://www.npmjs.com/package/genesis-tubs-engine).
 - Completed the [TensorFlow in Practice specialization](https://coursera.org/share/992bff6d94a39de26e755ce0e6464250) on coursera.
