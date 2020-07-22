@@ -256,23 +256,23 @@ for i in range(30000):
     differences_1.append(orbit_dist_1.dist(uniform))
     differences_2.append(orbit_dist_2.dist(uniform))
 
-plt.plot(differences_1[1000:]) # metropolis walker
-plt.plot(differences_2[1000:]) # normal walker
+plt.plot(differences_1[1000:])
+plt.plot(differences_2[1000:])
 plt.title('Distance between orbit distrubutions')
 plt.ylabel('difference')
 plt.xlabel('time')
 plt.show()
 
-print('Normal walker: {}'.format(differences_1[-1]))
-print('Metropolis walker: {}'.format(differences_2[-1]))
+print('Metropolis walker: {}'.format(differences_1[-1]))
+print('Normal walker: {}'.format(differences_2[-1]))
 ```
 
 
 ![png](/assets/metropolis-walks-on-graphs/metropolis-walks-on-graphs_10_0.png)
 
 
-    Normal walker: 0.0073974708134618376
-    Metropolis walker: 0.014881319869752028
+    Metropolis walker: 0.0073974708134618376
+    Normal walker: 0.014881319869752028
 
 
 The blue line above shows the convergence of the metropolis walker towards the uniform distrubution while the orange is the normal random walker. You can clearly see that the orange line is bounded away from zero wheras the metropolis walker is convergent.  

@@ -41,29 +41,48 @@ Where $$\nabla \pi_{\theta}( a_{i}\| s_{i})$$ is the derivative of the probabail
 We don't nesseserily get the optimal solution. Suppose we have a system with only one state and two actions. One of those actions has a big reward and the other a little reward. Suppose the way the policy network is initiallize means that it suggests the low reward over the high reward with a high probabailty. This shouldn't  be a problem. Over the training the network should end up reassigning the propabailty towards the better reward action. Unforntunatly becuase the policy  is initially incorrectly biased towards the poor reward option we're going to get far more samples of this action that the other and becuase it's positive reward, ableit lower reward the training will end up encourgaeing this action more simply becuase it gets more samples for it. A sufficently large amount of a small thing can be more than a small number of a big thing. This means we have to counteract this behavour by incorporating the polcy probabailties themselves into the update rule. So if an policy suggests an action and it returns a positive reward then we update in favour of that action dependent on how likley the policy was to suggest that reward. This way updates to low reward actions that the policy suggests are balanced by the higher porbabilty of the policy suggesting them and high reward actions that the policy isn't likly to suggest are boosted to make up for the smaller likelyhood of sampling from them. The way we do this is just to devide by the probabailty of selecting an action.
 
 $$
-\theta \rightarrow \theta + A\frac{\nabla \pi_{\theta}(s_{i}, a_{i})}{ \pi_{\theta}(s_{i}, a_{i})}
+\theta \rightarrow \theta + A\frac{\nabla \pi_{\theta}(a_{i}\|s_{i})}{ \pi_{\theta}(a_{i}\|s_{i})}
 $$
 
-For a better explination [see](https://towardsdatascience.com/an-intuitive-explanation-of-policy-gradient-part-1-reinforce-aa4392cbfd3c).
+We've sort of ignored the value $$A$$ but it's important. It's the amount we're going to encourage the network to take that action next time it finds itself in the same state. So in other words is how you evaluate the quality of the action taken with respect to the outcome recieved. For example a niave approach would just have it be the a constant positive number if the task is completeted correctly and a constant negative number if incorrectly.
 
-We've sort of ignored the value $$A$$ but it's important. Namely it
+The final issue we have is that the above function contains the derivative $$\nabla \pi_{\theta}(a_{i}\|s_{i})$$ which is inconveinent if we're using a machine learning frame work like tensorflow to implement this alogorithm. This is becuase tensorflow expects a loss functions that returns a scaler value. To solve this we can use the following:
+
+$$
+\nabla log(f) = \nabla {f}/f
+$$
+
+to get:
+
+$$
+\theta \rightarrow \theta + A\nabla log(\pi_{\theta}(a_{i}\|s_{i}))
+$$
+
+with the loss function:
+
+$$
+loss = log(\pi_{\theta}(a_{i}\|s_{i}))
+$$
+
+___
+
+## The Algorithm:
 
 
-<!-- $$
+Assuming niave constant positive or negative rewards:
 
-\begin{aligned}
-  & \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
-  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
-  & (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-      \phi(e_1, e_1) & \cdots & \phi(e_1, e_n) \\
-      \vdots & \ddots & \vdots \\
-      \phi(e_n, e_1) & \cdots & \phi(e_n, e_n)
-    \end{array} \right)
-  \left( \begin{array}{c}
-      y_1 \\
-      \vdots \\
-      y_n
-    \end{array} \right)
-\end{aligned}
+```
+1. Sample an intial random state
+2. Initiallize and empty array to store episodic memory
+3. For n steps:
+  - Sample an action from the policy dependent on current state,
+  - Take the action and move the actor into the new environment state
+  - Record the action and new state in the epsiodic memory
+4. If the actor was successful set A = 1 if unsucessful set A = -1
+5. Update the policy using $$\theta \rightarrow \theta + A\nabla log(\pi_{\theta}(a_{i}\|s_{i}))$$
+6. Repeat for as many episodes as needed
+```
 
-$$ -->
+Alternatives of the above discount the rewards back in time from the actor achieving reward by some value $$\gamma < 1$$. So if the actor is successful then the update on the action $$n$$ steps before the end of the episode is weighted by $$\gamma^n$$. This represents the fact that actions the actor takes just before it is successful should be rewarded more than actions taken further back in time.
+
+You can also assign rewards not just for completing the task at hand but also at intermittent stages in the process. In this case you'd record those rewards in epsiodic memory at the same time as the state and action that led to them. You'd then discount that reward back in time from when it was obtained.  
