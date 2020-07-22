@@ -1,8 +1,16 @@
 ---
 layout: page
-title: Curriculum vitae
+title: Curriculum Vitae
 permalink: /cv/
 ---
+
+___
+
+## Contact
+
+__Name__: Alex Athorne, 
+__Email__: alexander.athorne@gmail.com
+
 ___
 
 ## Education
@@ -11,7 +19,7 @@ ___
 October 2013 to October 2018 <br>
 **Doctorate in Mathematics** <br>
 Imperial College London - London <br>
-Thesis title: *Bifurications of set-valued dynamical systems*
+Thesis title: *Bifurcations of set-valued dynamical systems*
 
 October 2008 to October 2012 <br>
 **MMath. (Hons) in Mathematics** <br>
@@ -25,28 +33,27 @@ ___
 
 ### Personal Projects
 
-I’m a Math PhD turned enthusiastic programmer who sees software development as both a hobby and a career choice.
+I’m a Mathematics PhD turned enthusiastic programmer who sees software development as both a hobby and a career choice.
 I'm currently working as a software developer at a small start up called AlliedCrowds.
-My GitHub account also includes a number of personal projects i've been working on. ( https://github.com/mauicv )
+My [GitHub](https://github.com/mauicv) and [Blog](https://www.mauicv.com) also include a number of personal projects I've been working on.
 
-- Blog with articles about some of my explorations into machine learning and reinforcement learning. In particular
-  - Article on generating pictures of faces using Multi Scale Gradient Generative Adversarial Networks
-  - Article on experience with reinforcement learning applied to opanai gym problems.
-- https://github.com/mauicv/openai-gym-solns Reinforcement learning solutions to openai gym envrionments. Namely policy gradient, DQN and Actor Critic algorithms.
-- https://github.com/mauicv/genesis-tubs-engine is a physics engine built from scratch in Javascript. Available on npm: https://www.npmjs.com/package/genesis-tubs-engine
-- To ease the creation of projects with this engine I built an electron app with a intuitive ui: https://github.com/mauicv/genesis-tubs-builder
-- www.genesistubs.com is a Vuejs GitHub pages website that demonstrates some of the games i've developed with the genesis-tubs-engine.
-- https://bitbucket.org/mauicv/limos/src/master is a flask app which runs on a digital ocean server monitoring tickers on IEX. Whenever a symbol behaves unusually it emails me to tell so.
+- mauicv.com, a blog with articles about some of my explorations into machine learning, reinforcement learning and mathematics.
+- I've recently been learning about [Generative Adversarial Networks](https://www.mauicv.com/machine-learning/2020/07/22/generative-adversarial-networks-faces.html).
+- [Reinforcement learning solutions](https://github.com/mauicv/openai-gym-solns) to openai gym environments. Namely Policy Gradient, DQN and Actor Critic algorithms.
+- A [physics engine](https://github.com/mauicv/genesis-tubs-engine) built from scratch in JavaScript. Available on npm [here](https://www.npmjs.com/package/genesis-tubs-engine).
+- Completed the [TensorFlow in Practice specialization](https://coursera.org/share/992bff6d94a39de26e755ce0e6464250) on coursera.
+- To ease the creation of projects with this engine I built an [electron app](https://github.com/mauicv/genesis-tubs-builder) with a intuitive UI.
+- www.genesistubs.com is a Vuejs GitHub pages website that demonstrates some of the games I've developed with the genesis-tubs-engine.
+- A [flask app](https://bitbucket.org/mauicv/limos/src/master) which runs on a digital ocean server monitoring tickers on IEX. Whenever a symbol behaves unusually it emails me to tell so.
 - I've also been developing a messenger phone application written in dart and flutter. This has given me experience using web-sockets and google-cloud-storage.
-- Completed the TensorFlow in Practice specialization on coursera: https://coursera.org/share/992bff6d94a39de26e755ce0e6464250
 
 ### Current Employment
 
-AlliedCrowds is a small start up with currently only 5 employees. I am one of the two software developers working there and the small size of our team has allowed me to show that i'm a highly dependable and responsible asset. During my time there i've worked in depth with:
+AlliedCrowds is a small start up with currently only 5 employees. I am one of the two software developers working there and the small size of our team has allowed me to show that I'm a highly dependable and responsible asset. During my time there I've worked in depth with:
 
   1. Python, Flask and Eve with PostgreSQL via SQL-alchemy.
   2. Testing frameworks such as nose2 and pytest.
-  3. database mantianace via python scripts written in Juypter notebooks or just plain SQL.
+  3. database maintenance via python scripts written in Juypter notebooks or just SQL.
   4. NLP and ML via gensim and scikit-learn
   5. JavaScipt alongside Vuejs, Vuex, Vue Router, TestCafe and Mocha
   6. Node along with a wide range of npm Packages, including experience developing and publishing our own.
@@ -58,19 +65,21 @@ AlliedCrowds is a small start up with currently only 5 employees. I am one of th
 
 My role at AlliedCrowds ranged from full stack developer to data engineering/science. Projects I have worked on include:
 
-- www.isdb-innovate.org: This is a crowdfunding platform written in Vuejs with a backend built in Eve.
+- A [crowdfunding platform](www.isdb-innovate.org) written in vuejs with a back end built in Eve.
 - A dashboard website for a database asset AlliedCrowds maintains.
-- An API controller that makes using the Capital Finder API easy. https://www.npmjs.com/package/@alliedcrowds/capital-finder-api. This is now used behind a number of AlliedCrowds Capital-Finder websites.
-- A Veux store that utilises the API controller https://www.npmjs.com/package/@alliedcrowds/capital-finder-vuex
-- NLP and ML scripts written in Jupyter notebooks to analyse investor websites for the Capital Finder API.
-- I also helped build https://make-it.alliedcrowds.com, completely built http://investors.ghanacic.org/#/ and am currently building a similar investor directory for the united nations environment programme and have just finished building an annuity calculator which is hosted on the allied crowds site at: https://www.alliedcrowds.com/pension.
+- An [API controller](https://www.npmjs.com/package/@alliedcrowds/capital-finder-api) that makes using the Capital Finder API easy. This is now used behind a number of AlliedCrowds Capital-Finder websites.
+- A [Veux store](https://www.npmjs.com/package/@alliedcrowds/capital-finder-vuex) that utilises the API controller.
+- A command line tool that helps run a data pipeline, from scraping website html, processing the text, using gensim for topic analysis and finally generating reports. The final processed data is either used to help the analysts at AlliedCrowds write up reports or is used to update and maintain a database asset AlliedCrowds owns.
+- I also helped build [make-it](https://make-it.alliedcrowds.com) and completely built [ghanacic](http://investors.ghanacic.org/#/).
+- I've also built an annuity calculator which is hosted on the allied crowds site [here](https://www.alliedcrowds.com/pension).
+- I'm currently working on a [directory of carbon offsetting projects](alliedoffsets.com)
 
 ___
 
 ## Languages
 
-- **Primary Languages:** Javascript *(3 years)*, Python *(3 years)*
-- **Secondary Languages** Dart *(1 year)*, Matlab *(1 years)*,
+- **Primary Languages:** JavaScript *(4 years)*, Python *(4 years)*
+- **Secondary Languages** Dart *(2 years)*, Matlab *(1 years)*,
 
 I originally learnt C programming as a child and also did a course on C at university but can only recall the basics.
 
@@ -88,4 +97,4 @@ ___
 
 ## Personal Character
 
-I'm honest, hardworking and likeable. I spend my free time socialising, bouldering, playing guitar and reading. My greatest joy in life is good food with good friends.
+I'm honest, hard-working and likeable. I spend my free time socialising, bouldering, playing guitar and reading. My greatest joy in life is good food with good friends.

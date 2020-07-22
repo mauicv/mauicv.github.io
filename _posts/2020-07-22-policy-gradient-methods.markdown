@@ -72,7 +72,7 @@ $$
 
 ___
 
-## The Algorithm:
+## The Algorithm
 
 
 Assuming naive constant positive or negative rewards:
@@ -85,7 +85,7 @@ Assuming naive constant positive or negative rewards:
   - Take the action and move the actor into the new environment state
   - Record the action and new state in the episodic memory
 4. If the actor was successful set A = 1 if unsuccessful set A = -1
-5. Update the policy using $$\theta \rightarrow \theta + A\nabla log(\pi_{\theta}(a_{i}\|s_{i}))$$
+5. Update the policy
 6. Repeat for as many episodes as needed
 ```
 
