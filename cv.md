@@ -8,7 +8,7 @@ ___
 
 ## Contact
 
-__Name__: Alex Athorne, 
+__Name__: Alex Athorne,
 __Email__: alexander.athorne@gmail.com
 
 ___
@@ -49,7 +49,7 @@ My [GitHub](https://github.com/mauicv) and [Blog](https://www.mauicv.com) also i
 
 ### Current Employment
 
-AlliedCrowds is a small start up with currently only 5 employees. I am one of the two software developers working there and the small size of our team has allowed me to show that I'm a highly dependable and responsible asset. During my time there I've worked in depth with:
+[AlliedCrowds](https://www.alliedcrowds.com) is a small start up with currently only 5 employees. I am one of the two software developers working there and the small size of our team has allowed me to show that I'm a highly dependable and responsible asset. During my time there I've worked in depth with:
 
   1. Python, Flask and Eve with PostgreSQL via SQL-alchemy.
   2. Testing frameworks such as nose2 and pytest.
@@ -65,14 +65,14 @@ AlliedCrowds is a small start up with currently only 5 employees. I am one of th
 
 My role at AlliedCrowds ranged from full stack developer to data engineering/science. Projects I have worked on include:
 
-- A [crowdfunding platform](www.isdb-innovate.org) written in vuejs with a back end built in Eve.
+- A [crowdfunding platform](https://www.isdb-innovate.org) written in vuejs with a back end built in Eve.
 - A dashboard website for a database asset AlliedCrowds maintains.
 - An [API controller](https://www.npmjs.com/package/@alliedcrowds/capital-finder-api) that makes using the Capital Finder API easy. This is now used behind a number of AlliedCrowds Capital-Finder websites.
 - A [Veux store](https://www.npmjs.com/package/@alliedcrowds/capital-finder-vuex) that utilises the API controller.
 - A command line tool that helps run a data pipeline, from scraping website html, processing the text, using gensim for topic analysis and finally generating reports. The final processed data is either used to help the analysts at AlliedCrowds write up reports or is used to update and maintain a database asset AlliedCrowds owns.
 - I also helped build [make-it](https://make-it.alliedcrowds.com) and completely built [ghanacic](http://investors.ghanacic.org/#/).
 - I've also built an annuity calculator which is hosted on the allied crowds site [here](https://www.alliedcrowds.com/pension).
-- I'm currently working on a [directory of carbon offsetting projects](alliedoffsets.com)
+- I'm currently working on a [directory of carbon offsetting projects](https://www.alliedoffsets.com)
 
 ___
 
