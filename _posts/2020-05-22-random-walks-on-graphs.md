@@ -1,8 +1,12 @@
 ---
 layout: post
-title:  "Metropolis Hastings Alogirthm, Part 1: Random walks on Graphs"
-date:   2020-05-25 18:37:37 +0100
+title:  "Metropolis Hastings Algorithm, Random walks on Graphs"
+date:   2020-05-22 00:00:00 +0100
 categories: network-theory
+featured_img: assets/random-walks-on-graphs/network.png
+show_excerpts: True
+excerpt: 'Computing orbits of random walks on networks'
+
 ---
 <sup>__note__: *A [jupyter notebook](https://github.com/mauicv/graph-notebooks) version of this post is available here.*</sup>
 

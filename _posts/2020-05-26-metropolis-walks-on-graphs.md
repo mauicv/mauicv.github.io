@@ -1,8 +1,12 @@
 ---
 layout: post
-title:  "Metropolis Hastings Algorithm, Part 2: Numerical Evidence"
-date:   2020-05-25 18:37:37 +0100
+title:  "Metropolis Hastings Algorithm, Numerical Evidence"
+date:   2020-05-26 00:00:00 +0100
 categories: network-theory
+featured_img: assets/metropolis-walks-on-graphs/trajectories.png
+show_excerpts: True
+excerpt: 'Computing numerical evidence of the Metropolis Hastings Algorithm'
+
 ---
 <sup>__note__: *A [jupyter notebook](https://github.com/mauicv/graph-notebooks) version of this post is available here.*</sup>
 

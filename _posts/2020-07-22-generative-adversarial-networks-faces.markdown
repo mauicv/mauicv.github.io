@@ -3,6 +3,9 @@ layout: post
 title:  "Machine Learning, Computer Generated Faces"
 date:   2020-07-22 00:00:00 +0100
 categories: machine-learning
+featured_img: assets/generating-faces/happy-chappy.png
+show_excerpts: True
+excerpt: Trying with differing degrees of success to train the computer to generate pictures of faces. Some look kind of human, some look like the regulars at a bar I used to work.
 ---
 
 ___

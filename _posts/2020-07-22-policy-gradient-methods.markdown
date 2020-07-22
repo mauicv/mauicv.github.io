@@ -1,8 +1,12 @@
 ---
 layout: post
 title:  "Reinforcement learning, Policy Gradient Methods"
-date:   2020-05-25 18:37:37 +0100
+date:   2020-05-25 00:00:00 +0100
 categories: reinforcement-learning
+featured_img: assets/policy-grad/cart-pole.png
+show_excerpts: True
+excerpt: 'Intuition on Policy Gradient Methods'
+
 ---
 <sup>__note__: *Relevant code for this post is [here](https://github.com/mauicv/openai-gym-solns)*</sup>
 

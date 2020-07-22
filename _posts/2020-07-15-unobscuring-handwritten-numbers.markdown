@@ -3,6 +3,10 @@ layout: post
 title:  "Machine Learning, Recovering Obscured Handwritten Numbers"
 date:   2020-07-15 00:00:00 +0100
 categories: machine-learning
+featured_img: assets/unobscuring-handwritten-letters/obscured-handwriting.png
+show_excerpts: True
+excerpt: 'Training a model to recover obscured handwriting'
+
 ---
 
 ___

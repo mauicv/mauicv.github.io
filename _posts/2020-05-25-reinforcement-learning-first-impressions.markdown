@@ -3,6 +3,10 @@ layout: post
 title:  "First Impressions of Reinforcement Learning"
 date:   2020-05-25 18:37:37 +0100
 categories: reinforcement-learning
+featured_img: assets/intro-to-rl/success-lunar-lander.png
+show_excerpts: True
+excerpt: 'What to expect when starting out learning rl'
+
 ---
 <sup>__note__: *Relevant code for this post is [here](https://github.com/mauicv/openai-gym-solns)*</sup>
 
