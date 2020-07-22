@@ -10,9 +10,9 @@ ___
 
 ## Metropolis Hastings Random Walk on Graphs
 
-We're  going to build a slighly simpler notion of graph here than in part 1. Firstly its going to be bidirectional so a connection between nodes a and b corresponds to a connection between b and a. Instead of building a graph out of text i'm going to instead build one by taking a collection of nodes and then connecting each with some probability, we're also going to assume the weights on a single node are equally distrubuted. So for any random walker moving on this graph if its in a particular state and that state is connected to $n$ other states then the probability that the walker moves to each of those states is $$1/n$$
+We're  going to build a slightly simpler notion of graph here than in part 1. Firstly its going to be bidirectional so a connection between nodes a and b corresponds to a connection between b and a. Instead of building a graph out of text I'm going to instead build one by taking a collection of nodes and then connecting each with some probability, we're also going to assume the weights on a single node are equally distributed. So for any random walker moving on this graph if its in a particular state and that state is connected to $n$ other states then the probability that the walker moves to each of those states is $$1/n$$
 
-The following wall of code (sorry) is basically the same as in part 1 except the `TransitionMartix` matrix multiplication method now has an extra case included for a new class i've defined called `MetropolisWalker`. This way the matrix is applied differently to Metropolis Walkers than to normal walkers.
+The following wall of code (sorry) is basically the same as in part 1 except the `TransitionMartix` matrix multiplication method now has an extra case included for a new class I've defined called `MetropolisWalker`. This way the matrix is applied differently to Metropolis Walkers than to normal walkers.
 
 
 ```python
@@ -28,13 +28,13 @@ class Walker:
         self.state = state
 
 
-# For running metropolos hastings algorithm on the graph
+# For running Metropolis Hastings algorithm on the graph
 class MetropolisWalker:
     def __init__(self, state):
         self.state = state
 
 
-# Abstaction of single state such as in the Walker class to a distrubution of states.
+# Abstraction of single state such as in the Walker class to a distribution of states.
 class State:
     def __init__(self, states):
         self.states = {state: 0  for state in states}
@@ -102,8 +102,8 @@ class TransitionMatrix:
 
 
     def __matmul__(self, other):
-        """If applying the transistion matrix class to a Walker class then select the next state at random.
-        If applying to a State class we generate a new distrbution. """
+        """If applying the transition matrix class to a Walker class then select the next state at random.
+        If applying to a State class we generate a new distribution. """
 
         if isinstance(other, State):
             new_state = State([s for s, _ in other.states.items()])
@@ -139,22 +139,22 @@ class TransitionMatrix:
 
 ```
 
-## The Metropoplis Hastings Algorithm
+## The Metropolis Hastings Algorithm
 
 ___
 
 
-The Metropoplis Hasting Algorithm is a random walk on the graph that aims to obtain a representative sample of the graphs node independent of there connectivity. In a typical random walk a walker on a node `a` goes to a node `b` with probability $$1/n_{a}$$ where $$n_{a}$$ is the number of nodes to which `a` is connected. The Metropoloplis Hasting Algorithm is a random walk but where the probabailities have been adjusted. It works like so:
+The Metropolis Hastings algorithm is a random walk on the graph that aims to obtain a representative sample of the graphs node independent of there connectivity. In a typical random walk a walker on a node `a` goes to a node `b` with probability $$1/n_{a}$$ where $$n_{a}$$ is the number of nodes to which `a` is connected. In the Metropolis Hastings random walk the probabilities have been adjusted. It works like so:
 
 1. On node `a` pick a connected node `b` at random.
-2. Let $$p_{a,b}$$ be the probabiltiy of  going from `a` to `b`. This will be $$1/n_{a}$$. Let $$p_{b,a}$$ be the  probability of going from `b` to `a`, or $$1/n_{b}$$.
+2. Let $$p_{a,b}$$ be the probability of  going from `a` to `b`. This will be $$1/n_{a}$$. Let $$p_{b,a}$$ be the  probability of going from `b` to `a`, or $$1/n_{b}$$.
 3. Let $$p$$ be the minimum of $$1$$ and $$\frac{p_{a,b}}{p_{b,a}}$$
 4. With probability $p$ go from `a` to `b` otherwise stay at `a`
 5. Repeat
 
 The trick here happens at point 3. If $$p_{a,b}$$ is greater that $$p_{b,a}$$ then you go to `b` with probability 1. So if `a` is less connected than `b`... By making this adjustment you reverse the natural tendency for random walks in graphs to visit highly connected nodes more than less connected nodes.
 
-It's slightly hard to believe this works. Lets look first at the numerical simulations and see what happends:
+It's slightly hard to believe this works. Lets look first at the numerical simulations and see what happens:
 
 ## Numerical Simulations:
 
@@ -211,7 +211,7 @@ orbit_dist.draw()
 ![png](/assets/metropolis-walks-on-graphs/metropolis-walks-on-graphs_6_1.png)
 
 
-Now instead of a normal random walk lets try a metropolis hastings random walk and see what we get:
+Now instead of a normal random walk lets try a Metropolis Hastings random walk and see what we get:
 
 
 ```python
@@ -235,7 +235,9 @@ orbit_dist.draw()
 ![png](/assets/metropolis-walks-on-graphs/metropolis-walks-on-graphs_8_1.png)
 
 
-So as you can see the metropolosis hastings random walk looks like it's converging to the uniform distrubution. This means that the orbit is visiting the nodes representativly instead of being biased towards nodes which greater numbers of connections. We can compare the orbits more explicitly (__Warning__: If your running the following it will take a long time and is not the best way of doing this):
+So as you can see the Metropolis Hastings random walk looks like it's converging to the uniform distribution. This means that the orbit is visiting the nodes representatively instead of being biased towards nodes which greater numbers of connections. We can compare the orbits more explicitly
+
+__Warning__: If your running the following it will take a long time and is not the best way of doing this:
 
 
 ```python
@@ -275,4 +277,4 @@ print('Normal walker: {}'.format(differences_2[-1]))
     Normal walker: 0.014881319869752028
 
 
-The blue line above shows the convergence of the metropolis walker towards the uniform distrubution while the orange is the normal random walker. You can clearly see that the orange line is bounded away from zero wheras the metropolis walker is convergent.  
+The blue line above shows the convergence of the metropolis walker towards the uniform distribution while the orange is the normal random walker. You can clearly see that the orange line is bounded away from zero whereas the metropolis walker is convergent.  
