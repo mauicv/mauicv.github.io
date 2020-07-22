@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Machine Learning, Computer Generated Faces"
-date:   2020-05-25 18:37:37 +0100
+date:   2020-07-22 00:00:00 +0100
 categories: machine-learning
 ---
 
@@ -11,17 +11,19 @@ ___
 
 I started my Computer Generated pictures adventure by looking at trying to get the computer to generate images of doodles I'd drawn. I have this giant doodle I'd been noodling away on for a while and by taking a set of pictures of it and then subsampling bits of it I hoped that this would be enough to generate new doodles in the same style. I got a little lost. Remember I'm new to all this stuff and the main thing I'm coming up against is not really knowing what  to expect from the process of computer learning. Like how long before you give up on a model learning something, how a model can fail, what it looks like for a model to fail and so on. I'm intending on coming back to the doodle example but in order to better understanding what was going on I decided to opt for a dataset which better benchmarks, namely faces. The sole aim here is to end up with a computer generated picture of a face that is at least vaguely believably human.
 
+__Note__: I trained everything bellow using this [dataset](https://github.com/muxspace/facial_expressions).
+
 ___
 
 ## Naive Approach
 
-So the first question I had was why can you not just take train something like a reversed categorization model. So instead of taking images are returning a category you take a category and return an image. The principle should be the same you just reverse the images and instead of computing the categorical cross entropy between the predicted category and the real one you use a loss function that computes the difference between two images. I tried this out and I got this sightly disturbing pair.
+So the first question I had was why can you not just train something like a reversed categorization model. So instead of taking images are returning a category you take a category and return an image. The principle should be the same you just reverse the images and instead of computing the categorical cross entropy between the predicted category probabilities and the real category you use a loss function that computes the difference between two images. I tried this out and I got this sightly disturbing pair.
 
 ![happy-and-sad](/assets/generating-faces/happy-and-sad.png)
 
 The main thing to note here is that it's obviously generating an image that's in some sense an average of all smiley faces or non-smiley faces rather than a specific instance of a smiley face. This makes sense because there is only one input either 0 or 1 and it's expected to map each of these values into an image that best represents a wide range of pictures of faces. If it where to create a face that is very face like then it may be close to some faces within that set of faces but it will necessarily also be far away from others. So instead of a instance of an identifiably human face you instead get a eerie blurred mask that represents lots of faces all at once.
 
-So the I kind of expected this would happen. The issue is that the inputs don't give any room for manoeuvrer. Your asking these two values to describe the entirety of the dataset so of course the output will be a blended version of all the images. The natural solution to this is to make the space that represents the faces larger. There are some obvious difficulties to navigate here. Suppose you had a better labelling system. So instead of 0 or 1 lets make it a continuum. In the above example 0 was not-happy and 1 was happy. So with a continuum we could represent a sliding scale of happiness where some faces are more happy than other faces. Then we can add  other dimensions. So instead of just a happiness dimension we can have a hair dimension and a nose size dimension and so on... If your willing to spend the time going through the data set and labelling each image by where you think it falls within this set of feature dimensions you've defined then maybe you'll get more human faces out the other end. I've obviously not tried this, and that's because there are obvious issues with labelling large datasets to this degree of complexity.
+So the I kind of expected this would happen. The issue is that the inputs don't give any room for manoeuvrer. Your asking these two values to describe the entirety of the dataset so of course the output will be a blended version of all the images. The natural solution to this is to make the space that represents the faces larger. There are some obvious difficulties to navigate here. Suppose you had a better labelling system. So instead of 0 or 1 lets make it a continuum. In the above example 0 was not-happy and 1 was happy. So with a continuum we could represent a sliding scale of happiness where some faces are more happy than other faces. Then we can add  other dimensions. So instead of just a happiness dimension we can have a hair dimension and a nose size dimension and so on... If your willing to spend the time going through the data set and labelling each image by where you think it falls within this set of feature dimensions you've defined then maybe you'll get more human like faces out the other end. I've obviously not tried this because labelling large datasets to this degree of complexity is going to be very time intensive.
 
 ___
 
