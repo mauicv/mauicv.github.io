@@ -70,12 +70,6 @@ It was this that probably led me to bang my head against a wall the most! Often 
 
 These issues led me to take a kind of messy stop and start approach to the training of the some of the rl environments. I'd save the model during training when it was doing well and then revert to the save point if it then flat lined. This may have been more to do with my psychology than any sensible strategy but over time the model did improve even if that approach was disappointingly messy.
 
-#### Finding Reinforcement problems
-
-Once I'd started to see progress on the above problems I began trying to think of areas in which these ideas could be applied. Truthfully it's not as easy as you'd think. In principle anything can become a problem that has a reward on solving but typically the ones you might think of tend to fall foul of the fact that it's hard to run enough real world experiments to see any significant learning. NASA can only build so many moon landers. It seems like rl is well developed to solve problems that we can simulate on a machine. This is kind of an issue if you want real world applications in that you can train something in a simulation but there is no guarantee the solution will have any cross over and on top of this correctly modelling problem spaces inside physics engines is hardly trivial.
-
-Another issue that potentially arises within lots of problems is just the sparsity of rewards. You might try to train an rl agent to learn to write simple programs. After all there is a task, writing the code, and then there is the reward, getting the correct result on running the code. You can think of this as like a maze, the machine has to choose the exact correct sequence of letters from the alphabet to get to the exact correct string that correctly implements the solution. In this case unless you can find a way of shaping the rewards correctly the model will just endlessly try random combinations of letters. Presumably Human beings can do this because they've been rewarded from hundreds of smaller steps along the way so as to arrive at the point where we have all the tools needed to write, debug and correct software. If you want to teach an AI to code you'll probably have to teach it all the stuff in-between too.
-
 ___
 
 ## Main takeaways
