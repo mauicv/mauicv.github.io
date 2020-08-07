@@ -23,7 +23,7 @@ baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://mauicv.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: oblibob
 github_username:  mauicv
-
+google_analytics: UA-174941150-1
 # Build settings
 markdown: kramdown
 theme: minima
