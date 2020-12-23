@@ -14,4 +14,4 @@ I'm also looking for a job currently so feel free to email me if your hiring!
 ___
 
 
-<sup>__Note__ : I'm dyslectic and so some of my spelling and grammar is pretty bad. I had the choice of this either being an easy and quick process for creating and sharing content or a slow and unpleasant one that's going to put me off writing. I chose the former because I'd rather put things out than sit on them trying to make them perfect.</sup>
+<sup>__Note__ : I'm dyslexic and so some of my spelling and grammar is pretty bad. I had the choice of this either being an easy and quick process for creating and sharing content or a slow and unpleasant one that's going to put me off writing. I chose the former because I'd rather put things out than sit on them trying to make them perfect.</sup>
