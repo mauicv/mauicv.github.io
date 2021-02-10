@@ -17,7 +17,6 @@ excerpt: 'Reinforcement learning and Continuous control systems'
 
 It's been a bit of time since I last posted. I've had a lot of work on recently but I've started working on a new project that's been the motivation for learning a lot of this reinforcement learning material. Namely I want to build robots and train the control systems for these robots using reinforcement learning algorithms. Thus far the algorithms I've discussed here have been for discrete action spaces. This doesn't work for continuous control systems of the type I'm hoping to create. This post will be a rundown of deep deterministic policy gradients (DDPG) which is a reinforcement learning algorithm suited for continuous control tasks. This means stuff like motors that can apply a torque with a continuous range of values rather than one that is either on or off. In this post I'm going to talk about theory but mostly only to explain the stuff that it took me a while to understand.
 
-In later posts I'm going to talk about implementation, and what I learned from implementation it badly the first time and also I'm going to talk about debugging it and how all the errors I had where in the opposite place I expected them to be.
 
 ___
 
@@ -96,5 +95,3 @@ ___
 It's kind of hard to believe the above works. So here is proof it does:
 
 ![ddpg-bipedal-walker](/assets/deep-deterministic-policy-gradients/ending.gif)
-
-In the next post I'm going to describe some notes on implementation and debugging.
