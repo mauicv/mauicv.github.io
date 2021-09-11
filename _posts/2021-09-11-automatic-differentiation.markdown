@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  "Reverse Mode Automatic Differentiation"
-date:   2021-09-05 00:00:00 +0100
+date:   2021-09-11 00:00:00 +0100
 categories: machine-learning
 show_excerpts: True
-excerpt: 'Example implementation of back propagation algorithm for training deep neural networks.'
+excerpt: 'Example implementation of reverse mode automatic differentiation and back propagation algorithm for training deep neural networks.'
 featured_img: assets/auto-diff/model-output.png
 ---
 
@@ -14,7 +14,7 @@ featured_img: assets/auto-diff/model-output.png
 
 ## Intro
 
-Exploration of a simple implementation of reverse-mode automatic differentiation. I start by giving a simple intro to the theory behind automatic differentiation and then introduce a very simple and inefficient example implementation. Finally I'll talk about generalizing this approach to neural networks and illustrate the results of doing so.
+This is a brief exploration of reverse-mode automatic differentiation which is used to efficiently compute derivatives of functions. In particular it is the general case of back propagation used to train neural networks. I start by giving a simple intro to the theory behind automatic differentiation. Then I introduce a simple example implementation. Finally I'll talk a little about applying this approach to neural networks and illustrate the results of doing so.
 
 
 ## Theory
@@ -30,7 +30,7 @@ Each of these operations is on two variables. So two values go in and one value 
   <img src="/assets/auto-diff/function-graph.png" style="text-align: center">
 </div>
 
-Each node in the graph is an operation. Information flows through the graph via the lines connecting the nodes. $$y$$ for instance flows as input into two multiplication operation nodes. This gives an intuitive understanding of the influence that $$y$$ has on the graph. A change in $$y$$ only has an effect on those nodes connected to $$y$$.
+Each node in the graph is an operation. Information flows through the graph via the lines connecting the nodes. $$y$$ for instance flows as input into two multiplication operation nodes. This gives an intuitive understanding of the influence that $$y$$ has on the graph. A change in $$y$$ only has an effect on those nodes downstream of $$y$$.
 
 Note that we can consider a sort of localized picture of the graph using the variables $$a, b, c, d, e$$ that represent the outputs of each operation. For instance $$b = m(a, y)$$.
 
@@ -46,9 +46,13 @@ $$
 \frac{\partial f}{\partial y} = \sum_{n}{\frac{\partial f}{\partial n}\frac{\partial n}{\partial m}}
 $$
 
-where $$n$$ is each node for which there is an edge in the graph flowing from $$m$$ to $$n$$. If we know $$\partial f/\partial n$$ and $$\partial n/\partial m$$ for each node $$n$$ connected to the node $$m$$ then we can reverse down the graph computing $$\partial f/\partial m$$.
+where $$n$$ is each node for which there is an edge in the graph connecting $$m$$ to $$n$$. If we know $$\partial f/\partial n$$ and $$\partial n/\partial m$$ for each node $$n$$ connected to the node $$m$$ then we can compute $$\partial f/\partial m$$. In doing so we now have what we have part of what we need to compute the gradient for any node feeding into $$m$$ and so on. We can reverse down the graph computing $$\partial f/\partial m$$ and as long as we do so in the correct order we'll always know the derivatives downstream in the graph. The following illustrates this for $$\partial f/\partial y$$.
 
-The one issue is that at each node in order to compute $$\partial n/\partial m$$ we need to know the values of the inputs into $$n$$. We can do this by first running forward through the graph computing each of the inputs into each node.
+<div style="text-align: center">
+  <img src="/assets/auto-diff/function-graph-decomp-grads.png" style="text-align: center">
+</div>
+
+The one issue is that at each node in order to compute $$\partial n/\partial m$$ we need to know the values of the inputs into $$n$$. We can do this by first running forward through the graph computing each of the inputs into each node and at the same time computing the local derivatives.
 
 ## Implementation
 
@@ -107,8 +111,9 @@ class Var:
                              dv_s=other.value, dv_o=self.value)
 
 ```
+You can do this for more operations than addition and multiplication you just need to make sure you pass the correct local derivatives into the `new_node` call.
 
-so an operation on two instances of the `Var` class creates a new instance of `Var`. In order to ensure we can reverse through these nodes in the correct order we use a `Tape` class to record the creation of each node in the graph.
+So an operation on two instances of the `Var` class creates a new instance of `Var`. In order to ensure we can reverse through these nodes in the correct order we use a `Tape` class to record the creation of each node in the graph. Note that in the `compute_grads` method we reverse through all the nodes recorded onto the tape.
 
 ```py
 class Tape:
@@ -125,7 +130,7 @@ class Tape:
             node.compute_df_dn()
 ```
 
-we'll need to change the `Var` class slightly as well so that it knows about the tape and records new nodes onto it.
+We will need to change the `Var` class slightly as well so that it knows about the tape and records new nodes onto it.
 
 ```py
 
@@ -174,7 +179,9 @@ x.df_dn 	= 27
 y.df_dn 	= 10
 ```
 
-which from computing the derivative of $$f$$ w.r.t. $$x$$ and $$y$$ we see is correct. You can see the full implementation [here](https://github.com/mauicv/autograd-test/blob/main/src/reverse_mode.py).
+which from computing the derivative of $$f$$ w.r.t. $$x$$ and $$y$$ we see is correct when $$x=2, y=3$$.
+
+You can see the full implementation [here](https://github.com/mauicv/autograd-test/blob/main/src/reverse_mode.py).
 
 ## Back Propagation:
 
@@ -186,15 +193,15 @@ $$
 
 Many such layers can be chained together to create a deep neural network, call it $$M$$.
 
-If we have a training data set made up of $$x, y$$ pairs we want to choose the weights and biases such that $$l(M(x),y)$$ is minimized where $$l$$ is a loss function that compares the model output and the true output and returns a some measure of error between the two. If $$l$$ is differentiable then we can consider a function $$f(W, b) = l(M_{W, b}(x), y)$$. This is a function from the set of weights and biases to a model error. Namely from $$\mathbb{R}^{n} \rightarrow \mathbb{R}$$. We can build a graph made up of each operation in the sequence of layers similar to how we did for $$f(x, y) = 2yx^2 + xy + 3$$. This time however we're asking for the gradients w.r.t. the weights and biases instead of the $$x$$ inputs.
+If we have a training data set made up of $$x, y$$ pairs we want to choose the weights and biases such that $$l(M(x),y)$$ is minimized where $$l$$ is a loss function that compares the model output and the true output and returns a some measure of error between the two. If $$l$$ is differentiable then we can consider a function $$f(W, b) = l(M_{W, b}(x), y)$$. This is a function from the set of weights and biases to the model error. We can build a graph made up of each operation in the sequence of layers similar to how we did for $$f(x, y) = 2yx^2 + xy + 3$$. This time however we're asking for the gradients w.r.t. the weights and biases instead of the $$x$$ and $$y$$ inputs. Once you have the gradient with respect to the weights and biases you then know the direction in which to go to make the loss lower. Repeatedly computing the gradients and updating the weights and biases will cause the network to better map the training inputs to there outputs.
 
-Using the above implementation would be pretty difficult and inefficient. Mostly because it requires functions be decomposed into only operations of two values. Lots of references are going to mean slow lookup times as operations and derivatives are computed.
+Using the above implementation to do this would be pretty difficult and inefficient. Mostly because it requires functions be decomposed into only operations of two values. Lots of references are going to mean slow lookup times as operations and derivatives are computed.
 
-The nice thing about neural networks however is that they're made up of lots of very similar operations. For instance matrix multiplication and vector addition. Fortunately the derivative rules over these operations are easy to derive and generalize for each element involved in the operation. This means a) we have a simple rule for applying these operations and b) we have a simple rule for computing the derivatives for each variable in the operations. Because there are general rules that can be mapped over the relevant variables, libraries like numpy that store arrays contiguously in memory can obtain significant speed ups. Similarly lots of the same operation can be parallelized over multiple processors.
+The nice thing about neural networks however is that they're made up of lots of very similar operations. For instance matrix multiplication and vector addition. There are also simple expressions to derive each of the derivatives for each operation over all the relevant values. Libraries like numpy that store arrays contiguously in memory can obtain significant speed ups. Similarly lots of the same operation can be parallelized over multiple processors.
 
-Perhaps with a little bit of work you could extend the above implementation so that the value in the `Var` Class can be numpy arrays. You'd have to overide the `__matmul__` method for matrix multiplication too.
+With a little bit of work you could extend the above implementation so that the value in the `Var` Class could be a numpy array. You could override the `__matmul__` method for matrix multiplication too so that as well as computing the multiplication it also stores the result and computes the derivative.
 
-In the end I implemented a `Layer` and `Model` pattern [here](https://github.com/mauicv/autograd-test/blob/main/src/layer.py) and [here](https://github.com/mauicv/autograd-test/blob/main/src/model.py). In this case the Weight matrix and Biases are properties of the `Layer` class. Multiple layers are stacked in a `Model` and you can feed data through the model in the forward sweep. As you do so the local derivatives and values are computed. Then you can propagate the derivatives backwards to obtain the layer gradients.
+Instead of doing this I implemented a `Layer` and `Model` pattern [here](https://github.com/mauicv/autograd-test/blob/main/src/layer.py) and [here](https://github.com/mauicv/autograd-test/blob/main/src/model.py). In this case the Weight matrix and Biases are properties of the `Layer` class. Multiple layers are stacked in a `Model` and you can feed data through the model in the forward sweep. As you do so the local derivatives and values are computed and stored. Then you can propagate the derivatives backwards to obtain the layer gradients.
 
 I used the gradients to train a model that approximates the function $$f(x,y) = (x^2 + y^2)/2$$. The graph of the loss over the training duration looks like:
 <div style="text-align: center">
