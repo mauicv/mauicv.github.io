@@ -4,9 +4,9 @@ title: About
 permalink: /about/
 ---
 
-My names Alex, I'm a software developer currently working in a fin-tech start up in London. Professionally I'm currently something in between a full stack and a data engineer. Prior to being a software engineer I obtained a PhD from Imperial College London, studying dynamical systems.
+My names Alex, I'm a research engineer currently working at [seldon.io](https://www.seldon.io/) on [explainable AI](https://github.com/SeldonIO/alibi) and [drift](https://github.com/SeldonIO/alibi-detect). Prior to this I obtained a PhD from Imperial College London, studying dynamical systems.
 
-This blog is mostly about my faulty understanding of software, mathematics, data science and machine learning. If anything I say throughout is wrong please feel free to email me to let me know!
+This blog is mostly about my faulty understanding of software, mathematics, data science and machine learning.
 
 ___
 
