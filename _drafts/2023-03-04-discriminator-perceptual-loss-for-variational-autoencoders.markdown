@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Learning Perceptual losses to train better Variational Autoencoders"
-date:   2022-10-08 00:00:00 +0100
+date:   2023-03-04 00:00:00 +0100
 categories: machine-learning
 featured_img: /assets/discriminator-perceptual-loss-for-vaes/vaegan-training.gif
 show_excerpts: True
