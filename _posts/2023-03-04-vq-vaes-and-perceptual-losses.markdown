@@ -78,3 +78,8 @@ In practice, VQ-VAES suffer from something known as code-book collapse. This is 
 
 | ![real image 1](/assets/vector-quantized-vaes-and-perceptual-losses/A-real.png) | ![fake image 1](/assets/vector-quantized-vaes-and-perceptual-losses/A-recon.png) |
 | ![real image 2](/assets/vector-quantized-vaes-and-perceptual-losses/B-real.png) | ![fake image 2](/assets/vector-quantized-vaes-and-perceptual-losses/B-recon.png) |
+
+
+## Next Steps
+
+In the [next]({% post_url 2023-03-05-generative-modelling-using-vq-vaes %}) post I'll talk a little about using transformers to generate the discrete latent codes for the vq-vae model and in doing so turn them into generative models.

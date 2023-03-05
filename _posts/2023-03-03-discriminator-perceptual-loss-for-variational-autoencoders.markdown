@@ -47,7 +47,7 @@ def loss(critic, x, y, layer_inds=None):
             rx = x.reshape(batch_size, -1)
             ry = y.reshape(batch_size, -1)
             loss_sum = loss_sum + ((rx - ry)**2).sum(-1)
-    return sum
+    return loss_sum
 ```
 
 ### Training
@@ -58,11 +58,10 @@ Instead of using VGG I trained a discriminator along side the VAE and then used 
 - initialize autoencoder and discriminator
 - for n epochs
     - for x_batch in dataset
-        recon_batch = autoencoder(x_batch)
-        recon_batch_discriminator_prediction = discriminator(recon_batch)
-        update discriminator to differentiate between recon_batch and x_batch
-        compute perceptual distance between recon_batch and x_batch
-        update autoencoder to minimize perceptual distance
+        - recon_batch = autoencoder(x_batch)
+        - update discriminator to differentiate between recon_batch and x_batch
+        - compute perceptual distance between recon_batch and x_batch using discriminator
+        - update autoencoder to minimize perceptual distance
 ```
 
 There is also some choice of discriminator framework. In reality the plain old adversarial loss didn't give great results. Instead the two approaches that I found worked best used the approaches detailed [here (geometric GAN)](https://arxiv.org/pdf/1705.02894.pdf) and [here (wasserstein GAN)](https://arxiv.org/pdf/1701.07875.pdf).
@@ -82,4 +81,4 @@ As well as this I used every layer in the discriminator to compute the perceptua
 
 ### Conclusions
 
-The above is still pretty unstable and requires lots of fine tuning of hyper parameters to get right. I think because the GAN is still doing a lot of the work. In the next post I'll discuss [vector quantized variational autoencoders](https://arxiv.org/abs/1711.00937) which significantly improve the performance of the encoder/decoder step but result in some added complexities.
+The above is still pretty unstable and requires lots of fine tuning of hyper parameters to get right. I think because the GAN is still doing a lot of the work. In the [next]({% post_url 2023-03-04-vq-vaes-and-perceptual-losses %}) post I'll discuss [vector quantized variational autoencoders](https://arxiv.org/abs/1711.00937) which significantly improve the performance of the encoder/decoder step but result in some added complexities.
