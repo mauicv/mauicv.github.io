@@ -4,9 +4,13 @@ title: About
 permalink: /about/
 ---
 
-My names Alex, I'm a research engineer currently working at [seldon.io](https://www.seldon.io/) on [explainable AI](https://github.com/SeldonIO/alibi) and [drift](https://github.com/SeldonIO/alibi-detect). Prior to this I obtained a PhD from Imperial College London, studying dynamical systems.
+![photo of myself](/assets/about/me.jpeg)
+
+My names Alex, I'm a research engineer currently working at [seldon.io](https://www.seldon.io/) on [explainable AI](https://github.com/SeldonIO/alibi) and [drift](https://github.com/SeldonIO/alibi-detect). Prior to this I worked for a [start up](https://alliedoffsets.com/) that built databases of carbon-offsetting projects. Even prior to that, I obtained a PhD from Imperial College London, studying dynamical systems.
 
 This blog is mostly about my faulty understanding of software, mathematics, data science and machine learning.
+
+Feel free to email me at: alexander.athorne@gmail.com if you have any questions or discover some egregious error that can't go uncorrected. I'm also on [twitter](https://twitter.com/oblibob) but I don't use it except to post links, and i'm on [github](https://github.com/mauicv) if you want to see my code.
 
 ___
 
