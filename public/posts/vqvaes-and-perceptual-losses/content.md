@@ -4,7 +4,7 @@ ___
 
 ## Introduction
 
-This post follows on from my previous post on [discriminator-perceptual-loss-for-vaes]({% post_url 2023-03-03-discriminator-perceptual-loss-for-variational-autoencoders %}). In that post I introduced the idea of using a discriminator to learn a perceptual loss for a VAE. In this post we'll focus on improving the variational autoencoder itself. Specifically, we'll be using a vector quantized VAE (VQ-VAE) to improve the quality of the latent space. VQ-VAEs are introduced in the paper [Neural Discrete Representation Learning](https://arxiv.org/abs/1711.00937).
+This post follows on from my previous post on [perceptual-loss-for-vaes](/posts/perceptual-loss-for-vaes). In that post I introduced the idea of using a discriminator to learn a perceptual loss for a VAE. In this post we'll focus on improving the variational autoencoder itself. Specifically, we'll be using a vector quantized VAE (VQ-VAE) to improve the quality of the latent space. VQ-VAEs are introduced in the paper [Neural Discrete Representation Learning](https://arxiv.org/abs/1711.00937).
 
 ## VQ-VAEs
 
@@ -53,7 +53,7 @@ Finally, the third term encourages the encoder to output vectors that are close 
 
 So together these two terms mean that the encoder output vectors and the embedding vectors are both pushed towards each other but the encoder output vectors more slowly than the embedding vectors.
 
-Finally as mentioned in [discriminator-perceptual-loss-for-vaes]({% post_url 2023-03-03-discriminator-perceptual-loss-for-variational-autoencoders %}) at the same time as training the vq-vae we also train a discriminator and replace the typical reconstruction loss with a perceptual loss. This gives a much higher reconstruction quality.
+Finally as mentioned in [perceptual-loss-for-vaes](/posts/perceptual-loss-for-vaes) at the same time as training the vq-vae we also train a discriminator and replace the typical reconstruction loss with a perceptual loss. This gives a much higher reconstruction quality.
 
 ### Code-Book collapse
 
@@ -72,4 +72,4 @@ In practice, VQ-VAES suffer from something known as code-book collapse. This is 
 
 ## Next Steps
 
-In the [next]({% post_url 2023-03-05-generative-modelling-using-vq-vaes %}) post I'll talk a little about using transformers to generate the discrete latent codes for the vq-vae model and in doing so turn them into generative models.
+In the [next](/posts/generative-modelling-using-vq-vaes) post I'll talk a little about using transformers to generate the discrete latent codes for the vq-vae model and in doing so turn them into generative models.

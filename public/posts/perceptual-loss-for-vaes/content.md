@@ -4,7 +4,7 @@ ___
 
 ## Introduction
 
-Ages ago, when I first got into machine learning I set out trying to train a GAN. I wrote a blog post on the experience [here]({% post_url 2020-07-22-generative-adversarial-networks-faces %}). GANs are tricky to train because they're so unstable so I tried using [variational autoencoders instead](https://jaan.io/what-is-variational-autoencoder-vae-tutorial/). VAEs are very stable but if you've ever trained one you'll know that they give very blurry images and struggle to capture fine detail. For example the following is typical:
+Ages ago, when I first got into machine learning I set out trying to train a GAN. I wrote a blog post on the experience [here](/posts/generating-faces). GANs are tricky to train because they're so unstable so I tried using [variational autoencoders instead](https://jaan.io/what-is-variational-autoencoder-vae-tutorial/). VAEs are very stable but if you've ever trained one you'll know that they give very blurry images and struggle to capture fine detail. For example the following is typical:
 
 ![vae trained with mse](/posts/perceptual-loss-for-vaes/mse-vae.png)
 

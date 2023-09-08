@@ -4,7 +4,7 @@ __note__: *Relevant code for this post is [here](https://github.com/mauicv/Biped
 ---
 
 
-In a previous [post]({% post_url 2020-12-23-deep-deterministic-policy-gradients %}) I gave a rough explanation of DDPG theory. Here for prosperity, I list the stupid mistakes that confounded me for far longer than they should while implementing the DDPG algorithm:
+In a previous [post](/posts/ddpg/) I gave a rough explanation of DDPG theory. Here for prosperity, I list the stupid mistakes that confounded me for far longer than they should while implementing the DDPG algorithm:
 
 ### Accidentally bounding the critic 🤦‍♂️
 

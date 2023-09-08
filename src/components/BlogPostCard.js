@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function BlogPostCard({ post }) {
   return (
-    <Link to={`/blogs/${post.url}`} className="block">
+    <Link to={`/posts/${post.url}`} className="block">
       <div className="bg-gray-800 p-4 my-4 rounded-lg flex items-center hover:bg-gray-700 transition duration-200">
         <img 
           src={post.image} 

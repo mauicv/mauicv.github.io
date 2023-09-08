@@ -16,7 +16,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<BlogPosts />} />
-          <Route path="/blogs/:url" element={<BlogPostPage />} />
+          <Route path="/posts/:url" element={<BlogPostPage />} />
           <Route path="/about" element={<About />} />
           {/* <Route path="/cv" element={<CV />} /> */}
           {/* <Route path="/other" element={<Other />} /> */}

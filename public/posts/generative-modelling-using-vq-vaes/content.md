@@ -4,7 +4,7 @@ ___
 
 ## Introduction
 
-This post continuous on from this post on [vq-vaes]({% post_url 2023-03-04-vq-vaes-and-perceptual-losses %}). In it I talk about what a VQ-VAE is and how it can be trained. In this post I'll discuss how to use the latent vectors from a VQ-VAE to train a transformer for generative modelling. In particular i'll mention two main approaches the first was introduced in the paper [Taming Transformers for High-Resolution Image Synthesis](https://arxiv.org/abs/2012.09841) and the second is somewhat exploratory, but roughly adapts [diffusion models](https://arxiv.org/abs/2006.11239) for discrete latent spaces using transformers and inspired by the famous [stable diffusions paper](https://arxiv.org/abs/2112.10752).
+This post continuous on from this post on [vq-vaes](/posts/vqvaes-and-perceptual-losses). In it I talk about what a VQ-VAE is and how it can be trained. In this post I'll discuss how to use the latent vectors from a VQ-VAE to train a transformer for generative modelling. In particular i'll mention two main approaches the first was introduced in the paper [Taming Transformers for High-Resolution Image Synthesis](https://arxiv.org/abs/2012.09841) and the second is somewhat exploratory, but roughly adapts [diffusion models](https://arxiv.org/abs/2006.11239) for discrete latent spaces using transformers and inspired by the famous [stable diffusions paper](https://arxiv.org/abs/2112.10752).
 
 
 ## Generative Modelling using Sequential Transformers
