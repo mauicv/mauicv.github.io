@@ -23,6 +23,7 @@
     "react-scripts": "5.0.1",
     "react-syntax-highlighter": "^15.5.0",
     "rehype-katex": "^6.0.3",
+    "rehype-raw": "^7.0.0",
     "remark-math": "^5.1.1",
     "web-vitals": "^2.1.4"
   },

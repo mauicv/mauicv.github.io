@@ -5,6 +5,7 @@ import { loadPostsIndex, loadPost} from '../data/loadData';
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
+import rehypeRaw from "rehype-raw";
 import 'katex/dist/katex.min.css';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
@@ -59,7 +60,7 @@ function BlogPostPage() {
       <ReactMarkdown 
           className="markdown-content"
           remarkPlugins={[remarkMath]}
-          rehypePlugins={[rehypeKatex]}
+          rehypePlugins={[rehypeKatex, rehypeRaw]}
           children={postContent}
           components={components}
         />
