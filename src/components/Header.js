@@ -8,7 +8,7 @@ function Header() {
     <header className="bg-gray-800 shadow-md">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
         <div className="text-2xl font-bold text-gray-100">
-          Mauicv
+          <Link to="/" className="text-gray-300 hover:text-gray-100">Mauicv</Link>
         </div>
         <nav>
           <ul className="flex space-x-4">

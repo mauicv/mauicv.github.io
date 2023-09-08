@@ -5,6 +5,8 @@ import Header from './components/Header';
 import BlogPosts from './components/BlogPosts';
 import BlogPostPage from './components/BlogPostPage';
 import About from './components/About';
+import NotFoundPage from './components/404Page';
+import Footer from './components/Footer';
 // import CV from './components/CV';
 // import Other from './components/Other';
 
@@ -16,12 +18,15 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<BlogPosts />} />
+          <Route path="/posts/" element={<BlogPosts />} />
           <Route path="/posts/:url" element={<BlogPostPage />} />
           <Route path="/about" element={<About />} />
           {/* <Route path="/cv" element={<CV />} /> */}
           {/* <Route path="/other" element={<Other />} /> */}
           {/* Other routes can be added here */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        <Footer />
       </div>
     </Router>
   );

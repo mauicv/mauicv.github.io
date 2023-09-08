@@ -1,6 +1,6 @@
 // src/components/BlogPostPage.js
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { loadPostsIndex, loadPost} from '../data/loadData';
 import ReactMarkdown from 'react-markdown';
 import remarkMath from 'remark-math';
@@ -33,6 +33,7 @@ const components = {
 
 function BlogPostPage() {
   const { url } = useParams();
+  const navigate = useNavigate();
   
   const [postMeta, setPostMeta] = useState([]);
   const [postContent, setPostContent] = useState([]);
@@ -41,6 +42,10 @@ function BlogPostPage() {
     async function fetchData() {
       const data = await loadPostsIndex();
       const postMeta = data.find(p => p.url === url);
+      if (!postMeta) {
+        navigate('/404', { replace: true });
+        return null;
+      }
       const postContent = await loadPost(url);
       setPostMeta(postMeta);
       setPostContent(postContent)
