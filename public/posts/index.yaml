@@ -1,0 +1,49 @@
+# src/data/samplePosts.yaml
+- id: 1
+  image: /posts/intro-to-rl/success-lunar-lander.png
+  title: First Impressions of Reinforcement Learning
+  url: intro-to-rl
+  date: '2020-05-16'
+  topic: reinforcement-learning
+  excerpt: >
+    So I've recently started looking at Reinforcement
+    learning in my spare time because it just seems like
+    a pretty powerful tool. I feel like I sort of threw
+    myself in the deep end in that I have no experience
+    with any of the usual machine learning...
+- id: 2
+  image: /posts/random-walks-on-graphs/network.png
+  title: Metropolis Hastings, Random walks on Graphs
+  url: random-walks-on-graphs
+  date: '2020-05-22'
+  topic: network-theory
+  excerpt: >
+    So graphs are made up of nodes and edges. We're
+    going to build on top of a graph a random dynamical
+    system that's going to move around on it known as a
+    random walk. By doing so and recording each of the steps
+    the random dynamical...
+- id: 3
+  image: /posts/policy-gradient-methods/cart-pole.png
+  title: Reinforcement learning, Policy Gradient Methods
+  url: policy-gradient-methods
+  date: '2020-05-25'
+  topic: reinforcement-learning
+  excerpt: >
+    The reinforcement learning problem is made up of a
+    state space, and actor and a policy. The actor transitions
+    between states in the state space on the basis of the 
+    actions it's taking at those states. The actions it chooses
+    to take are selected by the policy...
+- id: 4
+  image: /posts/metropolis-walks-on-graphs/trajectories.png
+  title: Metropolis Hastings, Numerical Evidence
+  url: metropolis-walks-on-graphs
+  date: '2020-05-26'
+  topic: network-theory
+  excerpt: >
+    We're going to build a slightly simpler notion of graph
+    here than in part 1. Firstly its going to be bidirectional
+    so a connection between nodes a and b corresponds to a
+    connection between b and a. Instead of building a graph
+    out of text I'm going...
