@@ -68,4 +68,4 @@ _fig-2_: Reconstructions of variational autoencoder using a perceptual loss obta
 
 ### Conclusions
 
-The above is still pretty unstable and requires lots of fine tuning of hyper parameters to get right. I think because the GAN is still doing a lot of the work. In the [next]({% post_url 2023-03-04-vq-vaes-and-perceptual-losses %}) post I'll discuss [vector quantized variational autoencoders](https://arxiv.org/abs/1711.00937) which significantly improve the performance of the encoder/decoder step but result in some added complexities.
+The above is still pretty unstable and requires lots of fine tuning of hyper parameters to get right. I think because the GAN is still doing a lot of the work. In the [next](/posts/vqvaes-and-perceptual-losses) post I'll discuss [vector quantized variational autoencoders](https://arxiv.org/abs/1711.00937) which significantly improve the performance of the encoder/decoder step but result in some added complexities.
