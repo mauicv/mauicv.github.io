@@ -51,7 +51,7 @@ function BlogPostPage() {
       setPostContent(postContent)
     }
     fetchData();
-  }, []);
+  }, [navigate, url]);
 
   return (
     <div className="container mx-auto px-4 py-12 w-1/2">
