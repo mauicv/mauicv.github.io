@@ -1,0 +1,105 @@
+# src/data/samplePosts.yaml
+- id: 1
+  image: /posts/intro-to-rl/success-lunar-lander.png
+  title: First Impressions of Reinforcement Learning
+  url: intro-to-rl
+  date: '2020-05-16'
+  topic: reinforcement-learning
+  excerpt: >
+    So I've recently started looking at Reinforcement learning in my spare time because it just seems like a pretty powerful tool. I feel like I sort of threw myself in the deep end in that I have no experience with any of the usual machine learning...
+- id: 2
+  image: /posts/random-walks-on-graphs/network.png
+  title: Metropolis Hastings, Random walks on Graphs
+  url: random-walks-on-graphs
+  date: '2020-05-22'
+  topic: network-theory
+  excerpt: >
+    So graphs are made up of nodes and edges. We're going to build on top of a graph a random dynamical system that's going to move around on it known as a random walk. By doing so and recording each of the steps the random dynamical...
+- id: 3
+  image: /posts/policy-gradient-methods/cart-pole.png
+  title: Reinforcement learning, Policy Gradient Methods
+  url: policy-gradient-methods
+  date: '2020-05-25'
+  topic: reinforcement-learning
+  excerpt: >
+    The reinforcement learning problem is made up of a state space, and actor and a policy. The actor transitions between states in the state space on the basis of the  actions it's taking at those states. The actions it chooses to take are selected by the policy...
+- id: 4
+  image: /posts/metropolis-walks-on-graphs/trajectories.png
+  title: Metropolis Hastings, Numerical Evidence
+  url: metropolis-walks-on-graphs
+  date: '2020-05-26'
+  topic: network-theory
+  excerpt: >
+    We're going to build a slightly simpler notion of graph here than in part 1. Firstly its going to be bidirectional so a connection between nodes a and b corresponds to a connection between b and a. Instead of building a graph out of text I'm going...
+- id: 5
+  image: /posts/generating-faces/happy-chappy.png
+  title: Computer Generated Faces
+  url: generating-faces
+  date: '2020-07-22'
+  topic: machine-learning
+  excerpt: >
+    I started my Computer Generated pictures adventure by looking at trying to get the computer to generate images of doodles I'd drawn. I have this giant doodle I'd been noodling away on for a while and by taking a set of pictures of it and then...
+- id: 6
+  image: /posts/ddpg/openai-bipedal-walker.png
+  title: Deep Deterministic Policy Gradient
+  url: ddpg
+  date: '2020-12-23'
+  topic: reinforcement-learning
+  excerpt: >
+    It's been a bit of time since I last posted. I've had a lot of work on recently but I've started working on a new project that's been the motivation for learning a lot of this reinforcement learning material. Namely I want to build robots and train the ...
+- id: 7
+  image: /posts/ddpg-bugs/crazy-moves.gif
+  title: DDPG bugs
+  url: ddpg-bugs
+  date: '2021-02-10'
+  topic: reinforcement-learning
+  excerpt: >
+    In a previous post, I gave a rough explanation of DDPG theory. Here for prosperity, I list the stupid mistakes that confounded me for far longer than they should while implementing the DDPG algorithm...
+- id: 8
+  image: /posts/state-validators/python-logo.png
+  title: Validation Decorator for Classes in Python
+  url: state-validators
+  date: '2021-03-31'
+  topic: python
+  excerpt: >
+    When writing a code base with sufficiently complex class structures a problem that can arise is that when such complex class structures get themselves into an invalid state it can be many lines of code before that invalid state generates an error...
+- id: 9
+  image: /posts/exploration-noise/sn-noise-2.png
+  title: Comparison of Exploration Noise
+  url: exploration-noise
+  date: '2021-04-02'
+  topic: reinforcement-learning
+  excerpt: >
+    So a couple of months ago I had an idea to try and test different types of exploration noise in ddpg environments. The original ddpg paper suggests using an Ornstein–Uhlenbeck process for exploration...
+- id: 10
+  image: /posts/auto-diff/model-output.png
+  title: Reverse Mode Automatic Differentiation
+  url: auto-diff
+  date: '2021-09-11'
+  topic: machine-learning
+  excerpt: >
+    This is a brief exploration of reverse-mode automatic differentiation which is used to efficiently compute derivatives of functions. In particular it is the general case of back propagation used to train neural networks. I start by giving a ...
+- id: 11
+  image: /posts/perceptual-loss-for-vaes/vaegan-training.gif
+  title: Training better Variational Autoencoders
+  url: perceptual-loss-for-vaes
+  date: '2023-03-03'
+  topic: machine-learning
+  excerpt: >
+    Ages ago, when I first got into machine learning I set out trying to train a GAN. GANs are tricky to train because they're so unstable so I tried using variational autoencoders instead. VAEs are very stable but if you've ever trained one you'll...
+- id: 12
+  image: /posts/vqvaes-and-perceptual-losses/example-1.png
+  title: Vector quantized VAEs and perceptual losses
+  url: vqvaes-and-perceptual-losses
+  date: '2023-03-04'
+  topic: machine-learning
+  excerpt: >
+    In this post we'll focus on improving the variational autoencoder. Specifically, we'll be using a vector quantized VAE (VQ-VAE) to improve the quality of the latent space. VQ-VAEs are introduced in the paper Neural Discrete Representation Learning...
+- id: 13
+  image: /posts/generative-modelling-using-vq-vaes/reverse-discrete-diffusion.gif
+  title: Generative Modelling Using VQ-VAES
+  url: generative-modelling-using-vq-vaes
+  date: '2023-03-05'
+  topic: machine-learning
+  excerpt: >
+    In this post I'll discuss how to use the latent vectors from a VQ-VAE to train a transformer for generative modelling. In particular i'll mention two main approaches the first was introduced in the paper "Taming Transformers for High-Resolution Image...
