@@ -54,7 +54,7 @@ function BlogPostPage() {
   }, [navigate, url]);
 
   return (
-    <div className="container mx-auto px-4 py-12 w-1/2">
+    <div className="container mx-auto px-4 py-12 md:w-1/2">
       <h1 className="text-3xl font-bold mb-6">{postMeta.title}</h1>
       <img 
         src={postMeta.image} 
