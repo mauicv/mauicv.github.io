@@ -79,7 +79,7 @@
   topic: machine-learning
   excerpt: >
     This is a brief exploration of reverse-mode automatic differentiation which is used to efficiently compute derivatives of functions. In particular it is the general case of back propagation used to train neural networks. I start by giving a ...
-- id: 10
+- id: 11
   image: /posts/perceptual-loss-for-vaes/vaegan-training.gif
   title: Training better Variational Autoencoders
   url: perceptual-loss-for-vaes
@@ -87,7 +87,7 @@
   topic: machine-learning
   excerpt: >
     Ages ago, when I first got into machine learning I set out trying to train a GAN. GANs are tricky to train because they're so unstable so I tried using variational autoencoders instead. VAEs are very stable but if you've ever trained one you'll...
-- id: 11
+- id: 12
   image: /posts/vqvaes-and-perceptual-losses/example-1.png
   title: Vector quantized VAEs and perceptual losses
   url: vqvaes-and-perceptual-losses
@@ -95,7 +95,7 @@
   topic: machine-learning
   excerpt: >
     In this post we'll focus on improving the variational autoencoder. Specifically, we'll be using a vector quantized VAE (VQ-VAE) to improve the quality of the latent space. VQ-VAEs are introduced in the paper Neural Discrete Representation Learning...
-- id: 12
+- id: 13
   image: /posts/generative-modelling-using-vq-vaes/reverse-discrete-diffusion.gif
   title: Generative Modelling Using VQ-VAES
   url: generative-modelling-using-vq-vaes

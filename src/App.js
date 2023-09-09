@@ -9,9 +9,12 @@ import NotFoundPage from './components/404Page';
 import Footer from './components/Footer';
 import Projects from './components/Projects';
 // import CV from './components/CV';
+import ReactGA from 'react-ga';
+const TRACKING_ID = "G-C02095RQYN";
+ReactGA.initialize(TRACKING_ID);
 
 
-function App() {
+const App = () => {
   return (
     <Router>
       <div className="App bg-gray-900 text-gray-100 min-h-screen">
@@ -23,7 +26,6 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
           {/* <Route path="/cv" element={<CV />} /> */}
-          {/* Other routes can be added here */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Footer />

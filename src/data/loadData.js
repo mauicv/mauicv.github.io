@@ -9,7 +9,6 @@ async function loadPostsIndex() {
 
 async function loadPost(url) {
   const response = await fetch(`/posts/${url}/content.md`);
-  console.log('url', url)
   const markdownText = await response.text();
   return markdownText;
 }
