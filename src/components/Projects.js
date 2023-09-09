@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 function Projects() {
   return (
-    <div className="container mx-auto px-4 py-12 w-1/2">
+    <div className="container mx-auto px-4 py-12 md:w-1/2">
       <h1 className="text-3xl font-bold mb-6">Projects</h1>
       <Link to='https://genesistubs.com/asteroids' className="block">
         <div className="bg-gray-800 p-4 my-4 rounded-lg flex items-center hover:bg-gray-700 transition duration-200">
