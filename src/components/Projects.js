@@ -11,7 +11,7 @@ function Projects() {
         <div className="bg-gray-800 p-4 my-4 rounded-lg flex items-center hover:bg-gray-700 transition duration-200">
           <img 
             src='/images/genesis-tub-tooth.png' 
-            alt="Blog post" 
+            alt="Link to genesis tubs games website" 
             className="w-1/4 rounded-lg mr-4" 
           />
           <div className="w-3/4">
@@ -29,7 +29,7 @@ function Projects() {
         <div className="bg-gray-800 p-4 my-4 rounded-lg flex items-center hover:bg-gray-700 transition duration-200">
           <img 
             src='/images/evo-ant-8.gif' 
-            alt="Blog post" 
+            alt="Link to gerel repo"
             className="w-1/4 rounded-lg mr-4" 
           />
           <div className="w-3/4">
@@ -48,7 +48,7 @@ function Projects() {
         <div className="bg-gray-800 p-4 my-4 rounded-lg flex items-center hover:bg-gray-700 transition duration-200">
           <img 
             src='/images/quadruped-progress.png' 
-            alt="Blog post" 
+            alt="Link to evo-quad repo" 
             className="w-1/4 rounded-lg mr-4" 
           />
           <div className="w-3/4">
@@ -62,6 +62,23 @@ function Projects() {
           </div>
         </div>
       </Link>
+
+      <Link to='https://chrome.google.com/webstore/detail/build-a-bit/amkfanieebhiifhcnnflgnkbpeffmjlb' className="block">
+        <div className="bg-gray-800 p-4 my-4 rounded-lg flex items-center hover:bg-gray-700 transition duration-200">
+          <img 
+            src='/images/build-a-bit.png' 
+            alt="Link to build-a-bit chrome extension" 
+            className="w-1/4 rounded-lg mr-4" 
+          />
+          <div className="w-3/4">
+            <h2 className="text-xl font-bold">Build-a-bit</h2>
+            <p>
+              I built a chrome extension that helps you manage and create new habits. No one uses it, except me. 
+            </p>
+          </div>
+        </div>
+      </Link>
+
     </div>
   );}
 
