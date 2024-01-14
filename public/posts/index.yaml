@@ -103,3 +103,11 @@
   topic: machine-learning
   excerpt: >
     In this post I'll discuss how to use the latent vectors from a VQ-VAE to train a transformer for generative modelling. In particular i'll mention two main approaches the first was introduced in the paper "Taming Transformers for High-Resolution Image...
+- id: 14
+  image: /posts/moe-expert-choice/loss-comparison.png
+  title: Mixture of Experts - Expert choice routing
+  url: moe-expert-choice
+  date: '2024-01-14'
+  topic: machine-learning
+  excerpt: >
+    In this post I'll look at mixture of expert architectures for transformers. In particular instead of the typical routing mechanism utilized in Mixture of expert architectures, we'll be exploring an implementation of expert choice routing ...
