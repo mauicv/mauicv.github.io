@@ -1,5 +1,7 @@
 __note__: *Relevant code for this post is [ddpg-ant repo](https://github.com/mauicv/ddpg-ant)
 
+__note__: _2024 Alex: "I wrote this post a long time ago when I was starting learning about RL and so its pretty faulty due to me not knowing what I was talking about. For a slightly less lacking brain dump of content about rl please see [1](#/posts/rl-nes), [2](#/posts/rl-dqn), [3](#/posts/rl-pg), [4](#/posts/rl-ddpg), [5](#/posts/rl-wrld-model)_
+
 ## Intro
 
 So a couple of months ago I had an idea to try and test different types of exploration noise in ddpg environments. The original [ddpg paper](https://arxiv.org/pdf/1509.02971.pdf) suggests using an [Ornstein–Uhlenbeck process](https://en.wikipedia.org/wiki/Ornstein%E2%80%93Uhlenbeck_process) for exploration. I'd read [elsewhere](https://qr.ae/pG8hlM) that this wasn't actually needed and Gaussian noise would suffice. I wanted to see if using smoother noise helped the critic to learn in a more stable manner. Spoiler alert: It probably doesn't. Note that this is a purely exploratory effort though and not an exhaustive study.
