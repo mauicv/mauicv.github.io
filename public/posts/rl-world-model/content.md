@@ -1,15 +1,9 @@
-
-__Relevant code:__ [world-model-rl repo](https://github.com/mauicv/world-model-rl), 
-
-# World models and imagination for continuous control
-
 In the following posts we introduce a set of model free rl methods:
 
-- __1.__ [Natural Evolutionary Strategies](#/posts/continuous-control-rl-nes)
-- __2.__ [Q-Learning](#/posts/continuous-control-rl-q-learning)
-- __3.__ [Policy Gradients and REINFORCE](#/posts/continuous-control-rl-policy-gradients)
-- __4.__ [Advantage Actor Critic](#/posts/continuous-control-rl-ac)
-- __5.__ [DDPG and TD3](#/posts/continuous-control-rl-ddpg)
+- __1.__ [Natural Evolutionary Strategies](#/posts/rl-nes)
+- __2.__ [Q-Learning](#/posts/rl-dqn)
+- __3.__ [Policy Gradients and REINFORCE](#/posts/rl-pg)
+- __4.__ [DDPG and TD3](#/posts/rl-ddpg)
 
 A key aspect of the above methods is that they don't use a model of the environment they're trying to solve. Instead they learn by directly sampling outcomes. There are two main issues with this.
 
@@ -74,7 +68,7 @@ __Note__: some environments also have a done signal for when the agent has finis
 
 In order to train the agent we need to be able to generate a imagined rollout. To do this we start with a zero hidden state $h_0$ as well as a state sampled randomly from the environment. We first use the state to generate an action $a_0$ using the actor. We then compute the next hidden state as when training the dynamic model and use the prediction model to sample the next state - $s_1 \sim P_{\theta}(s_{1}| h_{0})$ and the next reward $r_0 \sim R_{\theta}(r_{0}| h_{0})$. We then use the actor again to obtain $a_1=\text{actor}(s_1)$ and we can compute the next hidden state and repeat. We iterate this process for a finite imagination horizon. Once we're done we can update the actor by summing the rewards and performing gradient ascent w.r.t. the actors parameters. We can do this because all the components of the world model are differentiable - with the exception of the probabilistic models. For these we use straight through estimation and it seems to work just fine.
 
-The negative sum of the rewards is one loss function we could use - however the finite time horizon limits how far ahead the reward signal propagates. To fix this the authors also introduce a value model $V(s)$ that computes the expected future reward from the state $s$. This is the exact same value function introduced in the [q-learning](http://localhost:3000/#/posts/continuous-control-rl-q-learning) post and used in the [advantage actor critic](http://localhost:3000/#/posts/continuous-control-rl-ac) algorithm. We'll train it using TD learning.
+The negative sum of the rewards is one loss function we could use - however the finite time horizon limits how far ahead the reward signal propagates. To fix this the authors also introduce a value model $V(s)$ that computes the expected future reward from the state $s$. This is the exact same value function introduced in the [q-learning](http://localhost:3000/#/posts/rl-q-learning) post and used in the [advantage actor critic](http://localhost:3000/#/posts/rl-ac) algorithm. We'll train it using TD learning.
 
 Remember that the TD learning uses the fact that $v_{\psi}(s_t)$ should equal the current reward plus the future expected reward for $s_{t+1}$ i.e. $r_t + \gamma v_{\psi}(s_{t+1})$. Because of the many possible future trajectories stemming off from $s_{t+1}$ the $v_{\psi}(s_{t+1})$ typically has very high variance. If we have a longer rollout then we can use this to improve the variance of $v_{\psi}(s_{t+1})$ by taking into account more $r_t$. If $k$ is the number of reward steps we want to account for and $H$ is the total length of the imagined rollout then we have:
 
@@ -110,11 +104,11 @@ I've implemented a simple module for the RSSM approach [here](https://github.com
 
 We can generate a imagined rollout by reconstructing the latent states using the decoder. Doing so gives us:
 
-![imagined rollout](posts/continuous-control-world-model-rl/rssm-imagined-rollout.gif)
+![imagined rollout](posts/rl-world-model/rssm-imagined-rollout.gif)
 
 In turn we can also use the actor in the real world environment:
 
-![real rollout](posts/continuous-control-world-model-rl/rssm-real-rollout.gif)
+![real rollout](posts/rl-world-model/rssm-real-rollout.gif)
 
 
 # Transformer state space model (TSSM):
@@ -142,11 +136,11 @@ _Note that I'm calling it TSSM but the TSSM authors never released the code so I
 
 An example of an imagined rollout:
 
-![imagined rollout](posts/continuous-control-world-model-rl/tssm-imagined-rollout.gif)
+![imagined rollout](posts/rl-world-model/tssm-imagined-rollout.gif)
 
 Actor in the real world environment:
 
-![real rollout](posts/continuous-control-world-model-rl/tssm-real-rollout.gif)
+![real rollout](posts/rl-world-model/tssm-real-rollout.gif)
 
 
 __Note__: Don't compare the RSSM and TSSM performance from the above rollouts as they're trained for different periods of time and so it's not a fair comparison. In general I found the RSSM to perform better than TSSM and there are a couple of reasons this might be the case.

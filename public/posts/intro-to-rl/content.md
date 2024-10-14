@@ -1,6 +1,7 @@
 
 __note__: *Relevant code for this post is [here](https://github.com/mauicv/openai-gym-solns)*
 
+__note__: _2024 Alex: "I wrote this post a long time ago when I was starting learning about RL and so its potentially pretty faulty due to me not knowing what I was talking about. For a slightly less lacking brain dump of content about rl please see [1](#/posts/rl-nes), [2](#/posts/rl-dqn), [3](#/posts/rl-pg), [4](#/posts/rl-ddpg), [5](#/posts/rl-wrld-model)_
 ___
 
 ## First Impressions

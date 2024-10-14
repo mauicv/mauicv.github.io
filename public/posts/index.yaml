@@ -112,50 +112,42 @@
   excerpt: >
     In this post I'll look at mixture of expert architectures for transformers. In particular instead of the typical routing mechanism utilized in Mixture of expert architectures, we'll be exploring an implementation of expert choice routing ...
 - id: 15
-  image: /posts/continuous-control-rl-nes/brain.jpg
+  image: /posts/rl-nes/brain.jpg
   title: Natural Evolutionary Strategies
-  url: continuous-control-rl-nes
+  url: rl-nes
   date: '2024-10-10'
-  topic: reinforcement-learning for continuous control
+  topic: reinforcement-learning for robotic control
   excerpt: >
-    In this post we talk about using Natural Evolutionary strategies (NES) in order to train agents to solve continuous control problems.
+    In this post we talk about using Natural Evolutionary strategies (NES) in order to train agents to solve robotic control problems.
 - id: 16
-  image: /posts/continuous-control-rl-q-learning/brain.jpg
+  image: /posts/rl-dqn/brain.jpg
   title: Q learning
-  url: continuous-control-rl-q-learning
+  url: rl-dqn
   date: '2024-10-10'
-  topic: reinforcement-learning for continuous control
+  topic: reinforcement-learning for robotic control
   excerpt: >
-    In this post I explain Q-learning - a method that trains a model to predict the value of actions in order to obtain a policy that maximizes reward in the environment.
+    In this post I explain dqn - a method that trains a model to predict the value of actions in order to obtain a policy that maximizes reward in the environment.
 - id: 17
-  image: /posts/continuous-control-rl-policy-gradients/brain.webp
-  title: Policy Gradients and REINFORCE
-  url: continuous-control-rl-policy-gradients
+  image: /posts/rl-pg/brain.jpg
+  title: Policy Gradient methods
+  url: rl-pg
   date: '2024-10-10'
-  topic: reinforcement-learning for continuous control
+  topic: reinforcement-learning for robotic control
   excerpt: >
-    In this post introduce policy gradient methods and the REINFORCE algorithm. These method use monte carlo sampling in order to compute gradients of the reward function.
+    In this post we introduce policy gradient methods, the REINFORCE algorithm and Actor Critic methods. These methods estimate the reward gradients in order to update a policy to solve the RL problem.
 - id: 18
-  image: /posts/continuous-control-rl-ac/brain.jpg
-  title: Actor Critic and Advantage Actor Critc
-  url: continuous-control-rl-ac
-  date: '2024-10-10'
-  topic: reinforcement-learning for continuous control
-  excerpt: >
-    In this post we introduce actor/critic methods and explain how they help solve stability issues with REINFORCE.
-- id: 19
-  image: /posts/continuous-control-rl-ddpg/brain.jpg
+  image: /posts/rl-ddpg/brain.jpg
   title: Deep Deterministic Policy Gradients
-  url: continuous-control-rl-ddpg
+  url: rl-ddpg
   date: '2024-10-10'
-  topic: reinforcement-learning for continuous control
+  topic: reinforcement-learning for robotic control
   excerpt: >
-    In this post we introduce deep deterministic policy gradients - a method that incorporates ideas from q-learning and applies them to continuous action spaces.
-- id: 20
-  image: /posts/continuous-control-world-model-rl/brain.jpg
+    In this post we introduce deep deterministic policy gradients - a method that incorporates ideas from DQN but for deterministic policies.
+- id: 19
+  image: /posts/rl-world-model/brain.jpg
   title: World Models and Reinforcement Learning
-  url: continuous-control-world-model-rl
+  url: rl-world-model
   date: '2024-10-10'
-  topic: reinforcement-learning for continuous control
+  topic: reinforcement-learning for robotic control
   excerpt: >
     In this post we introduce learned world models using both transformers and RNNs. We explain how we can use the differentiability of the reward signal from this world model to train an agent.

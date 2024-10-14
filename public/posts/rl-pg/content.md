@@ -1,6 +1,3 @@
-___
-
-# Policy Gradient And REINFORCE
 
 Q-learning approaches learn the quality of each action in each state in order to compute the optimal action from that state, thus they indirectly learn the policy. Policy gradient methods however learn the policy directly.
 
@@ -14,7 +11,7 @@ Where
 
 - __1.__ $d^\pi(s)$ is the stationary distribution of $\pi$ in the environment. The stationary distribution refers to the distribution of states if you let the policy run for infinite time. In the case of finite MDP we can extend them to infinite processes by looping them on episode end, allowing us to use the same analysis.
 - __2.__ $V^{\pi}(s)$ is the expected return of a policy $\pi$ from state $s$. So $\mathbb{E}_{a\sim \pi}(R(S)|S=s)$
-- __3.__ And $Q^{\pi}(s,a)$ is the same as $V^{\pi}(s)$ but taking actions into account as well. So $Q^\pi(s,a) = \mathbb{E}_{a\sim \pi}(R(S)|S=s, A=a)$
+- __3.__ And $Q^{\pi}(s,a)$ is the same as $V^{\pi}(s)$ but taking the action into account as well. So $Q^\pi(s,a) = \mathbb{E}_{a\sim \pi}(R(S)|S=s, A=a)$
 
 Its difficult to compute the derivative of the above due to the $d^\pi$ term and its dependency on $\pi$. However we can use the policy gradient theorem (see [here](https://lilianweng.github.io/posts/2018-04-08-policy-gradient/#policy-gradient-theorem) for derivation).
 
@@ -70,4 +67,52 @@ One way of thinking about the above REINFORCE is as follows.
 
 This [gist](https://gist.github.com/mauicv/43ba180044b49a065ec30390e5189b3d) is an example of REINFORCE applied to the CartPole environment. It's still a little unstable but much better then q-learning.
 
-Next: [Actor Critic methods](#/posts/continuous-control-rl-ac)
+# Actor Critic methods
+
+REINFORCE and surprisingly well however its pretty unstable due to the variance of the rollout samples. The instability stems from the the sample estimate of $R(s_0)$ which can vary wildly between rollouts. One option is to get a more stable estimate of $R(s)$ by learning it in the same way we learn the $Q(a|s)$ function in Q-learning, i.e. using temporal difference methods and the bellman equations.
+
+The on-policy algorithm works as follows:
+
+- __1.__ Initialise $t_0$ and $s$. 
+- __2.__ Compute $a_0=\argmax(Q(\cdot, s_{0}))$
+- __3.__ Sample next state, $s_1$, using $a_0$ and get reward $r_1$
+- __4.__ Update the Policy or Actor, $\pi$, using REINFORCE update rule:
+
+$$
+\theta\leftarrow\theta+\alpha Q(a_i, s_i)\nabla_\theta\log\pi(a_i|s_i)
+$$
+
+- __5.__ Update the $Q$ function (the critic) using TD learning:
+    
+    $$
+    Q(s_t,a_t) \leftarrow Q(s_t,a_t)  + \alpha (R_{t+1} + \gamma \max_{a\in A} Q(s_{t+1},a_{t+1}) - Q(s_t,a_t))
+    $$
+    
+- __6.__ Repeat
+
+# Advantage Actor Critic
+
+We can do even better than the above by using the advantage $A^{\pi}(a_t, s_t) = Q^{\pi}(a_t, s_t) - V^{\pi}(s_t)$ instead of just $Q^{\pi}(a_t, s_t)$ when updating the actor (policy, step 4 in actor-critic). Intuitively the advantage is the difference in expected value of choosing the action $a_t$ compared to the expected value of that state on its own.
+
+Note that $Q^{\pi}(a_t, s_t)=r_t+V^{\pi}(s_{t+1})$ and so hence: $A^{\pi}(a_t, s_t) = r_t + V^{\pi}(s_{t+1}) - V^{\pi}(s_t)$. Hence instead of learning $Q$ and $V$ we can just learn $V$ and use:
+
+$$
+\theta\leftarrow\theta+\alpha \nabla_\theta\log\pi(a_i|s_i)[r_t + V(s_{t+1})-V(s_t)]
+
+$$
+
+Note that with the above the new critic update rule is:
+
+$$
+V(s_t) \leftarrow V(s_t)  + \alpha (r_{t+1} + \gamma V(s_{t+1}) - V(s_t))
+$$
+
+We use the advantage in the policy update like so:
+
+$$
+\theta\leftarrow\theta+\alpha A(a_i,s_i)\nabla_\theta\log\pi(a_i|s_i)
+$$
+
+[This github gist](https://gist.github.com/mauicv/c8650ddc6aaf9e1deb9f33dc2f14ccc3) contains an example of advantage actor critic applied to CartPole.
+
+Next: [Deep Deterministic Policy Gradients](#/posts/rl-ddpg)

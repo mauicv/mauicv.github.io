@@ -1,14 +1,10 @@
-___
-
-# Q-learning
-
-[Natural Evolutionary Strategies](#/posts/continuous-control-rl-new) are nice because you only care about the entire reward for a whole environment rollout and not individual actions taken within a rollout. This makes it easy to implement. However what if we can get more signal by looking at the outcomes of individual actions taken given specific states in a rollout. 
+[Natural Evolutionary Strategies](#/posts/rl-nes) are nice because you only care about the entire reward for a whole environment rollout and not individual actions taken within a rollout. This makes it easy to implement. However what if we can get more signal by looking at the outcomes of individual actions taken given specific states in a rollout. 
 
 Ultimately we want a way of taking a state and turning it into an action. We want this action to maximize the cumulative rollout reward. Ideally we'd just have $X$ and $Y$ where $X$ is a dataset of states and $Y$ is the actions to take in those states. Then we could just fit a model that generates those actions in those state. However in the RL paradigm we don't have such a training dataset we just have the environment. Our dataset is made up of sequences of state, action and reward values sampled from the environment.
 
 If we can train a model $Q$ that takes actions and states and output an accurate estimate of the value (expected cumulative reward over future rollout) of the action then we actually have a way of solving the environment. We do this by simply selecting the action that maximizes $Q$'s output at each state. This is Q-Learning.
 
-__Note__: _The above works well for small sets of discrete actions however if we're applying this to continuous action problems there is an obvious issue. Namely, computing the action that maximizes $Q(s, a)$ becomes computationally expensive. Later on we'll discuss [DDPG](#/posts/continuous-control-rl-ddpg) which solves this. But for now i'm introducing Q-learning despite being primarily a discrete method, because it uses a set of ideas which end up being useful for continuous control._
+__Note__: _The above works well for small sets of discrete actions however if we're applying this to continuous action problems there is an obvious issue. Namely, computing the action that maximizes $Q(s, a)$ becomes computationally expensive._
 
 ## Reward discounting and The reward Function
 
@@ -81,6 +77,6 @@ In order to improve stability the authors of the Deep Q-learning paper also
 - __1.__ Use an experience replay buffer which stores a history of policy rollouts. i.e. tuples of $\{(s_i, a_i, r_{i+1}, a_{i+1}, s_{i+1})\}_{i\in\mathbb{N}}$.
 - __2.__ Only update the $Q$ model intermittently. So we freeze $Q$ and accumulate the changes in this and then transfer it back to $Q$ after a certain number of steps. We always choose the action with respect to the frozen $Q$ model. Doing so reduces oscillations.
 
-[This](https://gist.github.com/mauicv/2f2b3afea4de11fee343e4863cf354c3) colab notebook applies DQN to the CartPole environment. It should be said that it's not always successful - but later methods significantly improve the stability.
+[This](https://gist.github.com/mauicv/2f2b3afea4de11fee343e4863cf354c3) colab notebook applies DQN to the CartPole environment. It should be said that it's not always successful - but later methods significantly improve stability.
 
-Next: [Policy Gradients and REINFORCE](#/posts/continuous-control-rl-policy-gradients)
+Next: [Policy Gradients methods](#/posts/rl-pg)

@@ -1,8 +1,6 @@
-___
+# RL for robotic control
 
-# RL for continuous control Introduction
-
-This is a first post, covering natural evolutionary strategies, in a set of posts detailing RL methods for continuous control. Its mostly a content dump of notes I've written while learning the area but perhaps someone will find it helpful.
+This is a first post, covering natural evolutionary strategies, in a set of posts detailing RL methods for robotic control. Its mostly a content dump of notes I've written while learning the area but perhaps someone will find it helpful. All of the methods link to implementations applied to different environments.
 
 ## What is RL?
 
@@ -14,15 +12,11 @@ Typically the environment is the input of an RL algorithm and the actor or polic
 
 A rollout of the environment for a given policy refers to the sequences $\{(s_i,a_i,r_i)\}_{i\in\mathbb{N}}$ where $a_i=\pi(s_{i-1})$ and $s_i$ and $r_i$ where computed from $P(s_{i-1}, a_i)$ or sampled from $s_i,r_i\sim P(s, r|s_{i-1}, a_{i})$. Note that the environment is usually given as a Markov decision process with transition probabilities given by $s_i,r_i\sim P(s, r|s_{i-1}, a_{i})$.
 
-## What is Continuous Control?
-
-Continuous control refers to RL problems for which the agent outputs continuous responses to the environment state rather than discrete ones. I'm abusing the notion slightly because I'm really interested in robotic control problems - and in particular I'm assuming continuous control with dense reward signals. This means that the agent is continuously moving in the space and every movement get some kind of positive or negative reward.
-
 ## What is Model Free RL?
 
 Model free RL basically involves any RL algorithm that doesn’t explicitly try to model some aspect of the environment directly. Instead the actor learns from direct interaction with the environment. We'll start this series by focusing on model-free approaches but the last posts will deal with methods that do use world models to solve the environment. Note that model free is nice because you don't need to train a model of the environnement which is hard and expensive. However:
 
-- __1.__ Model free is not sample efficient - It requires lots of sampling steps which is fine if your training in simulations on a computer but not if you're doing it in reality.
+- __1.__ Model free is not sample efficient - It requires lots of sampling steps which is usually fine if your training in simulations on a computer but not if you're doing it in reality.
 - __2.__ Using a simulation to train a model-free method means you have to write a simulation for the real world environment your trying to solve and also means accounting for any gap between the real world and the simulation.
 
 ## Natural Evolutionary Strategies (NES):
@@ -97,7 +91,7 @@ The following github gists showcase implementations that solve the CartPole envi
 
 Because of its stability and ease of implementation I think NES is a great place to start when trying to solve a continuous control RL environment. I actually think in many cases it’s the fastest solution. Not because the runtime is smaller but because theres almost no hyper-parameter tuning required which reduces the overhead from running multiple experiments. If you care about delivery (and not pulling your hair out) rather than SOTA this might be your best course of action! I remember when I first got into RL spending ages trying to get various policy gradient methods to work for continuous control and getting more and more frustrated with intermittent results. Eventually I read the NES paper and implemented it and worked on the first try. Here is the results of this [method applied to Ant-v4](https://github.com/mauicv/evo-ant).
 
-![evo-ant-v4](/posts/continuous-control-rl-nes/evo-ant.gif)
+![evo-ant-v4](/posts/rl-nes/evo-ant.gif)
 
-Next: [Q-learning](#/posts/continuous-control-rl-q-learning)
+Next: [Q-learning](#/posts/rl-dqn)
 
