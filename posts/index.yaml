@@ -151,3 +151,11 @@
   topic: reinforcement-learning for robotic control
   excerpt: >
     In this post we introduce learned world models using both transformers and RNNs. We explain how we can use the differentiability of the reward signal from this world model to train an agent.
+- id: 20
+  image: /posts/real-world-model-rl/pogo-rollout.gif
+  title: Real World Models and Reinforcement Learning
+  url: real-world-model-rl
+  date: '2024-10-10'
+  topic: reinforcement-learning for robotic control
+  excerpt: >
+    Using world model rl to train a real world robot to walk.
