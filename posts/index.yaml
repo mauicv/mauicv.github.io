@@ -155,7 +155,7 @@
   image: /posts/real-world-model-rl/pogo-rollout.gif
   title: Real World Models and Reinforcement Learning
   url: real-world-model-rl
-  date: '2024-10-10'
+  date: '2025-06-16'
   topic: reinforcement-learning for robotic control
   excerpt: >
     Using world model rl to train a real world robot to walk.
