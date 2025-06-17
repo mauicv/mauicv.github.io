@@ -65,3 +65,14 @@ All the above being said, I did end up with a policy that satisfied the requirem
     <td><video src='/posts/real-world-model-rl/rollout-2.mp4' alt='rollout-2' controls></td>
   </tr>
 </table>
+
+## Code:
+
+The code for this blog post is quite extensive and spread across multiple places. The key pieces are as follows:
+
+- $\circ$ [Control and sampling code for Pogo and the camera](https://github.com/mauicv/pogo_control)
+- $\circ$ [The world model RL repo](https://github.com/mauicv/world-model-rl)
+- $\circ$ [My transformers repo (for the transformer world model backend)](https://github.com/mauicv/transformers)
+- $\circ$ [The training notebook](https://colab.research.google.com/drive/1DYSs7cjL6v7FgubEhDXVKfIMJdl1XdZU)
+
+These are all in varying states of organization and quality. At some point, I might try to make something more coherent.
