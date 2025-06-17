@@ -15,7 +15,7 @@ function Header() {
             <li><Link to="/" className="text-gray-300 hover:text-gray-100">Posts</Link></li>
             <li><Link to="/projects" className="text-gray-300 hover:text-gray-100">Projects</Link></li>
             <li><Link to="/about" className="text-gray-300 hover:text-gray-100">About</Link></li>
-            {/* <li><Link to="/cv" className="text-gray-300 hover:text-gray-100">CV</Link></li> */}
+            <li><Link to="/cv" className="text-gray-300 hover:text-gray-100">CV</Link></li>
           </ul>
         </nav>
       </div>

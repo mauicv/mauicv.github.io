@@ -8,7 +8,7 @@ import About from './components/About';
 import NotFoundPage from './components/404Page';
 import Footer from './components/Footer';
 import Projects from './components/Projects';
-// import CV from './components/CV';
+import CV from './components/CV';
 import ReactGA from 'react-ga';
 const TRACKING_ID = "G-C02095RQYN";
 ReactGA.initialize(TRACKING_ID);
@@ -24,6 +24,7 @@ const App = () => {
           <Route path="/posts/" element={<BlogPosts />} />
           <Route path="/posts/:url" element={<BlogPostPage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/cv" element={<CV />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
