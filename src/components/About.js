@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 
 
 const markdownContent = `
-My names Alex, I'm a research engineer currently working at [seldon.io](https://www.seldon.io/) on [explainable AI](https://github.com/SeldonIO/alibi) and [drift](https://github.com/SeldonIO/alibi-detect). Prior to this I worked for a [start up](https://alliedoffsets.com/) that built databases of carbon-offsetting projects. Even prior to that, I obtained a PhD from Imperial College London, studying dynamical systems.
+I'm a research engineer currently working at [seldon.io](https://www.seldon.io/) on [explainable AI](https://github.com/SeldonIO/alibi) and [drift](https://github.com/SeldonIO/alibi-detect). Prior to this I worked for a [start up](https://alliedoffsets.com/) that built databases of carbon-offsetting projects. Even prior to that, I obtained a PhD from Imperial College London, studying dynamical systems.
 
 This blog is mostly about my faulty understanding of software, mathematics, data science and machine learning.
 
