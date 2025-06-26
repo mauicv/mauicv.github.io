@@ -10,7 +10,7 @@ const markdownContent = `
 
 A research engineer passionate about the intersection of robotics, AI, and reinforcement learning. I believe these fields are critical to solving complex, real-world problems. I am seeking a role where I can further advance these technologies and collaborate on research-driven engineering projects.
 
-I write extensively about my personal projects in these areas on my [blog](www.mauicv.com). Most recently, I trained a robot dog to walk. To do this, I recreated the [DayDreamer](https://arxiv.org/abs/2206.14176) paper by Wu et al., but used a transformer as the world model instead of an RNN. For more details, please see the [blog post](https://mauicv.com/#/posts/real-world-model-rl).
+I write extensively about my personal projects in these areas on my [blog](https://www.mauicv.com). Most recently, I trained a robot dog to walk. To do this, I recreated the [DayDreamer](https://arxiv.org/abs/2206.14176) paper by Wu et al., but used a transformer as the world model instead of an RNN. For more details, please see the [blog post](https://mauicv.com/#/posts/real-world-model-rl).
 
 A project that's a personal favourite of mine is my basic JavaScript [physics engine](https://genesistubs.com/asteroids) that I built when I first got into software development.
 
