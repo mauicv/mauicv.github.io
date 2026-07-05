@@ -301,6 +301,8 @@ On the other hand autograd is a method of efficiently computing gradients over t
 
 Autograd in particular allows us a way of abstracting a lot of the code we'd have to write in such a physics engine. Instead of computing the constraint gradients explicitly we can do it using JAX. Note that in the update equations for $$\Delta \mathbf{x}$$ and $$\Delta \lambda_j$$ the one complex term is the gradient of $$C$$ which needs to be computed analytically or... computationally using JAX. I built a 3D XPBD engine here called [Tac](https://github.com/mauicv/tac/tree/main), the following illustrates the `AutogradConstraint` class which allows the user to define a constraint by passing in the constraint function, the JAX autograd functionality computes the gradient in place and uses this in the update step. Technically doing so is slightly less efficient than precomputing the analytic gradient and just coding that in - however all of this is just math ops which are really fast, and with JAX's just in time compilation we can get rid of any unnecessary memory read/writes - resulting in pretty fast performance.  
 
+One thing worth being clear about though - the autograd here is just computing the *constraint* gradient $$\nabla C$$ inside the solver, it's not the same thing as differentiating a whole rollout end to end. That end to end version - backpropagating through the full simulation to learn parameters - is the thing i was actually excited about back in the intro, and it's a fair bit harder than just getting $$\nabla C$$ for free.
+
 
 ```python
 from tac.core.state import State
@@ -376,4 +378,4 @@ As the aim of this project was a simulation of a robot i'm building and trying t
 
 ![actuated robot](/posts/XPBD-JAX-physics-engine/gnoci.gif)
 
-I chose to leave this here for now because my instinct is there will be lots of unexpected details to solve in order to get it performant enough to actually apply to this robot i'm trying to train to walk. I do love this approach to physics though and I will return to it at some point. 
+I chose to leave this here for now because my instinct is there will be lots of unexpected details to solve in order to get it performant enough to actually apply to this robot i'm trying to train to walk. The differentiable side of things is also still an open problem for me - getting clean gradients back through the iterative Gauss-Seidel solve and the non-smooth contact updates is exactly the kind of thing that turns into a much bigger job than it first looks, and it's the part i'd actually need for the learning story i mentioned at the start. I do love this approach to physics though and I will return to it at some point. 
