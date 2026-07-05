@@ -159,3 +159,11 @@
   topic: reinforcement-learning for robotic control
   excerpt: >
     Using world model rl to train a real world robot to walk.
+- id: 21
+  image: /posts/XPBD-JAX-physics-engine/box.gif
+  title: Differentiable particle based dynamics engine written in JAX
+  url: XPBD-JAX-physics-engine
+  date: '2026-07-04'
+  topic: physics/machine-learning
+  excerpt: >
+    A differentiable XPBD physics engine in JAX.
