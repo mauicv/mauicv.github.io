@@ -167,3 +167,11 @@
   topic: physics/machine-learning
   excerpt: >
     A differentiable XPBD physics engine in JAX.
+- id: 22
+  image: /posts/building-a-robot/gnoci-cad-drawing.png
+  title: Designing and Building a bipedal robot
+  url: building-a-robot
+  date: '2026-07-28'
+  topic: robotics
+  excerpt: >
+    Its been a dream of mine to build and train a robot to walk. I sort of semi achieved this goal last year when I trained a quadruped to walk but i wasn't really happy with the quadruped for various reasons...
