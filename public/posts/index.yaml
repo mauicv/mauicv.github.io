@@ -175,3 +175,11 @@
   topic: robotics
   excerpt: >
     Its been a dream of mine to build and train a robot to walk. I sort of semi achieved this goal last year when I trained a quadruped to walk but i wasn't really happy with the quadruped for various reasons...
+- id: 23
+  image: /posts/training-gnoci-to-walk/gnoci-walking.gif
+  title: Training a bipedal robot to walk (sort of)
+  url: training-gnoci-to-walk
+  date: '2026-09-09'
+  topic: robotics
+  excerpt: >
+    Update on the progress of training a bipedal robot to walk. 
